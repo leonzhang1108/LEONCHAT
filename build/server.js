@@ -1,5 +1,6 @@
 
 import Koa from 'koa'
+import opn from 'opn'
 import path from 'path'
 import http from 'http'
 import config from '../config'
@@ -19,6 +20,7 @@ const port = process.env.PORT || config.dev.port
 const staticPath = '../src'
 const app = new Koa()
 const compiler = webpack(webpackConfig)
+const autoOpenBrowser = !!config.dev.autoOpenBrowser
 
 const devMiddleware = wdm(compiler, {
   publicPath: webpackConfig.output.publicPath,
@@ -31,6 +33,10 @@ const hotMiddleware = whm(compiler, {
 
 app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
+
+devMiddleware.waitUntilValid(() => {
+  if(autoOpenBrowser && process.env.NODE_ENV == 'dev') opn('http://localhost:3000/')
+})
 
 
 // 静态
