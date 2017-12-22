@@ -1,9 +1,6 @@
-var path = require('path')
-var config = require('../config')
-
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
+import path from 'path'
+import config from '../config'
+const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
   entry: {

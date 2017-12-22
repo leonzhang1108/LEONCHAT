@@ -1,10 +1,10 @@
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-var ProgressBarPlugin = require('progress-bar-webpack-plugin')
+import webpack from 'webpack'
+import config from '../config'
+import merge from 'webpack-merge'
+import baseWebpackConfig from './webpack.base.conf'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
