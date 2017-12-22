@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var config = require('../config')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -44,6 +45,8 @@ module.exports = {
       template: 'src/index.html',
       inject: true
     }),
-    new FriendlyErrorsPlugin()
+    new FriendlyErrorsPlugin(),
+    // 进度条
+    new ProgressBarPlugin()
   ]
 }

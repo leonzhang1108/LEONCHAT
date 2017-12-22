@@ -11,7 +11,7 @@ import convert from 'koa-convert'
 import webpackConfig from './webpack.dev.conf'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
-import { log } from '../src/js/utils/console'
+import { log } from './util'
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -69,6 +69,6 @@ io.on('connection', socket => {
   })
 
   socket.on('disconnect', data => {
-    log(data, 'blue')
+    log(data)
   })
 })
