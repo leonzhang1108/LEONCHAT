@@ -11,6 +11,7 @@ import convert from 'koa-convert'
 import webpackConfig from './webpack.dev.conf'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
+import { log } from '../src/js/utils/console'
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -35,7 +36,7 @@ app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
 
 devMiddleware.waitUntilValid(() => {
-  if(autoOpenBrowser && process.env.NODE_ENV == 'dev') opn('http://localhost:3000/')
+  autoOpenBrowser && process.env.NODE_ENV == 'dev' && opn('http://localhost:3000/')
 })
 
 
@@ -50,11 +51,24 @@ const httpServer = http.Server(app.callback()).listen(port, err => {
   console.log(err || `[demo] session is starting at port ${port}`)
 })
 
+// socket.io
 const io = socketio.listen(httpServer)
 
-io.sockets.on('connection', socket => {
-  socket.emit('s2c', { hello: 'world' })
-  socket.on('c2s', data => {
-    console.log(data)
+io.on('connection', socket => {
+
+
+  // 上线
+  socket.on('online', data => {
+    log(`${data.name} is online`, 'green')
+    socket.broadcast.emit('online', data)
+  })
+
+  socket.on('offline', data => {
+    log(`${data.name} is offline`, 'gray')
+    socket.broadcast.emit('offline', data)
+  })
+
+  socket.on('disconnect', data => {
+    log(data, 'blue')
   })
 })

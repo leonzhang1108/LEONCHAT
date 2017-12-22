@@ -1,13 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Hello from './pages/hello'
+import App from './app'
 import io from 'socket.io-client'
 
 const socket = io.connect('http://localhost:3000')
-socket.on('s2c', data => {
-  console.log(data)
-  socket.emit('c2s', {my:'data'})
+let name = Math.random()
+
+socket.emit('online', { name })
+
+socket.on('online', data => {
+  console.log(`${data.name} is online`)
 })
 
+socket.on('offline', data => {
+  console.log(`${data.name} is offline`)
+})
 
-ReactDOM.render(<Hello/>, document.getElementById("app"))
+window.onbeforeunload = () => {
+  socket.emit('offline', { name })
+  socket.disconnect()
+}
+
+
+ReactDOM.render(<App/>, document.getElementById("app"))
