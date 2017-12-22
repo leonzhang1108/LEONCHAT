@@ -3,15 +3,15 @@ import Koa from 'koa'
 import opn from 'opn'
 import path from 'path'
 import http from 'http'
-import config from '../config'
-import kstatic from 'koa-static'
-import socketio from 'socket.io'
+import { log } from './util'
 import webpack from 'webpack'
+import config from '../config'
+import socketio from 'socket.io'
+import kstatic from 'koa-static'
 import convert from 'koa-convert'
-import webpackConfig from './webpack.dev.conf'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
-import { log } from './util'
+import webpackConfig from './webpack.dev.conf'
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
