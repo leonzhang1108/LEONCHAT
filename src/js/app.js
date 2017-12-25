@@ -1,8 +1,14 @@
 import React from 'react'
+import { Layout } from 'antd'
+const { Header, Content, Footer } = Layout
+
 import 'style/app'
 const App = props => (
-  <div className='test'>hello</div>
+  <Layout>
+    <Header>Header</Header>
+    <Content>Content</Content>
+    <Footer>Footer</Footer>
+  </Layout>
 )
-
 
 export default App

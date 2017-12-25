@@ -15,7 +15,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.scss'],
     alias: {
-      style: resolve('src/style')
+      style: resolve('src/style'),
+      img: resolve('src/img'),
+      js: resolve('src/js')
     }
   },
   module: {
@@ -23,6 +25,9 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       include: [resolve('src')]
+    }, {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
     }, {
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader']
