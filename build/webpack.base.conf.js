@@ -13,8 +13,10 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.json'],
-    alias: {}
+    extensions: ['.js', '.json', '.scss'],
+    alias: {
+      style: resolve('src/style')
+    }
   },
   module: {
     rules: [{
@@ -22,8 +24,8 @@ module.exports = {
       loader: 'babel-loader',
       include: [resolve('src')]
     }, {
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader']
     }]
   }
 }
