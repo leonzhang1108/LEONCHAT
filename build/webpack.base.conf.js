@@ -17,7 +17,10 @@ module.exports = {
     alias: {
       style: resolve('src/style'),
       img: resolve('src/img'),
-      js: resolve('src/js')
+      js: resolve('src/js'),
+      pages: resolve('src/js/pages'),
+      utils: resolve('src/js/utils'),
+      router: resolve('src/js/router')
     }
   },
   module: {

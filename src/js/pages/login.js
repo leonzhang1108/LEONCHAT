@@ -1,9 +1,7 @@
 import React from 'react'
+import 'style/pages/login'
 const Login = props => (
-  <div>
-    <div>this is login</div>
-    <DatePicker />
-  </div>
+  <div>login</div>
 )
 
 export default Login
