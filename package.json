@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "babel-node build/server.js",
+    "dev": "babel-node server/server.js",
     "build": "webpack build/webpack.dev.conf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +28,7 @@
     "http-proxy-middleware": "^0.17.4",
     "koa": "^2.4.1",
     "koa-convert": "^1.2.0",
+    "koa-router": "^7.3.0",
     "koa-static": "^4.0.2",
     "koa-webpack-dev-middleware": "^2.0.2",
     "koa-webpack-hot-middleware": "^1.0.3",

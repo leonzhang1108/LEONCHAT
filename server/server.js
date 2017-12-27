@@ -2,6 +2,7 @@ import Koa from 'koa'
 import opn from 'opn'
 import path from 'path'
 import http from 'http'
+import router from './router'
 import { log } from './util'
 import webpack from 'webpack'
 import config from '../config'
@@ -10,7 +11,7 @@ import kstatic from 'koa-static'
 import convert from 'koa-convert'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
-import webpackConfig from './webpack.dev.conf'
+import webpackConfig from '../build/webpack.dev.conf'
 import historyFallback from 'koa2-history-api-fallback'
 
 if (!process.env.NODE_ENV) {
@@ -35,6 +36,10 @@ const hotMiddleware = whm(compiler, {
 app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
 
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
+
 app.use(historyFallback())
 
 devMiddleware.waitUntilValid(() => {
@@ -45,10 +50,9 @@ devMiddleware.waitUntilValid(() => {
 // 静态
 app.use(kstatic(path.join(__dirname, staticPath)))
 
-
-const httpServer = http.Server(app.callback()).listen(port, err => {
-  console.log(err || `Server started on port ${port}`)
-})
+// server
+const httpServer = http.Server(app.callback())
+httpServer.listen(port, err => console.log(err || `Server started on port ${port}`))
 
 // socket.io
 const io = socketio.listen(httpServer)

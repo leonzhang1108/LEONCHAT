@@ -20,7 +20,6 @@ module.exports = {
       pages: resolve('src/js/pages'),
       utils: resolve('src/js/utils'),
       store: resolve('src/js/store'),
-      router: resolve('src/js/router'),
       components: resolve('src/js/components')
     }
   },
