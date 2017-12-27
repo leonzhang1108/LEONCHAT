@@ -13,11 +13,11 @@ class Chat extends React.Component {
     this.props.history.push(`/login`)
   }
   componentDidMount = () => {
-    console.log(this.props.store.todos)
+    console.log(this.props.store.nickname)
   }
   render() {
     let string = <Button type="primary" onClick={this.toLogin}>click to login</Button>
-    let nickname = this.props.match.params.nickname
+    let nickname = this.props.store.nickname
     nickname && (string = `welcome ${nickname}`)
     return <div>{string}</div>
   }

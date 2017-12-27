@@ -1,10 +1,14 @@
 
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
-export default class Store {
+class Store {
   // 被观察者
-  @observable todos = [{
-    title: "完成 Mobx 翻译",
-    done: false,
-  }]
+  @observable nickname = ''
+
+  @action changeNickname = (val) => {
+    this.nickname = val
+  }
+
 }
+
+export default new Store()
