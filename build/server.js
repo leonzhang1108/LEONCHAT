@@ -1,4 +1,3 @@
-
 import Koa from 'koa'
 import opn from 'opn'
 import path from 'path'
@@ -43,12 +42,9 @@ devMiddleware.waitUntilValid(() => {
 // 静态
 app.use(kstatic(path.join(__dirname, staticPath)))
 
-// app.use(async ctx => {
-//   ctx.body = 'test'
-// })
 
 const httpServer = http.Server(app.callback()).listen(port, err => {
-  console.log(err || `[demo] session is starting at port ${port}`)
+  console.log(err || `Server started on port ${port}`)
 })
 
 // socket.io

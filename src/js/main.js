@@ -1,7 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './app'
+import store from 'store'
 import io from 'socket.io-client'
+import { Provider } from "mobx-react"
+import { HashRouter as Router } from "react-router-dom"
 
 const socket = io.connect('http://localhost:3000')
 let name = Math.random()
@@ -22,4 +25,10 @@ window.onbeforeunload = () => {
 }
 
 
-ReactDOM.render(<App/>, document.getElementById("app"))
+ReactDOM.render(
+  <Router>
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  </Router>
+,document.getElementById("app"))
