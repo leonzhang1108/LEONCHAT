@@ -11,6 +11,7 @@ import convert from 'koa-convert'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
 import webpackConfig from './webpack.dev.conf'
+import historyFallback from 'koa2-history-api-fallback'
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
@@ -33,6 +34,8 @@ const hotMiddleware = whm(compiler, {
 
 app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
+
+app.use(historyFallback())
 
 devMiddleware.waitUntilValid(() => {
   autoOpenBrowser && process.env.NODE_ENV == 'dev' && opn('http://localhost:3000/')

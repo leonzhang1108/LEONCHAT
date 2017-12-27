@@ -16,8 +16,7 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html',
-      inject: true
+      template: 'src/index.html'
     }),
     new FriendlyErrorsPlugin(),
     // 进度条

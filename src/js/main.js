@@ -4,7 +4,7 @@ import App from './app'
 import store from 'store'
 import io from 'socket.io-client'
 import { Provider } from "mobx-react"
-import { HashRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
 
 const socket = io.connect('http://localhost:3000')
 let name = Math.random()
