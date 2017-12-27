@@ -1,6 +1,7 @@
 import React from 'react'
 import 'style/pages/login'
 import { Input } from 'antd'
+import { createSocket } from 'socket'
 import { observer, inject } from 'mobx-react'
 
 const Search = Input.Search
@@ -11,17 +12,20 @@ class Login extends React.Component{
    constructor(props) {
      super(props)
    }
-   onSearch = nickname => {
-     const { store, history } = this.props
-     store.changeNickname(nickname)
-     history.push(`/chat`)
+   doLogin = name => {
+     
+    const { store, history } = this.props
+    store.changeNickname(name)
+    store.addSocket(createSocket(name))
+    history.push(`/chat`)
+
    }
    render() {
      return (
       <div className='login-input-wrap'>
         <Search
           placeholder="your nickname"
-          onSearch={this.onSearch}
+          onSearch={this.doLogin}
           enterButton="Login"
         />
       </div>
