@@ -1,5 +1,5 @@
 import Loadable from 'react-loadable'
-import Loading from 'js/components/Loading'
+import Loading from 'components/Loading'
 
 const load = component => Loadable({
   loader: () => import(`pages/${component}`),

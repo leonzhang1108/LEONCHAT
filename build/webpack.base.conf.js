@@ -1,5 +1,4 @@
 import path from 'path'
-import config from '../config'
 const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
@@ -20,7 +19,8 @@ module.exports = {
       js: resolve('src/js'),
       pages: resolve('src/js/pages'),
       utils: resolve('src/js/utils'),
-      router: resolve('src/js/router')
+      router: resolve('src/js/router'),
+      components: resolve('src/js/components')
     }
   },
   module: {

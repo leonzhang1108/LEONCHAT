@@ -1,16 +1,9 @@
 import React from 'react'
 const Loading = ({ isLoading, error }) => {
-  // Handle the loading state
-  if (isLoading) {
-      return <div>Page is loading...</div>
-  }
-  // Handle the error state
-  else if (error) {
-      return <div>Sorry, there was a problem loading the page.</div>
-  }
-  else {
-      return null
-  }
+  let res = null
+  isLoading && (res = <div>Page is loading...</div>)
+  error && (res = <div>Sorry, there was a problem loading the page.</div>)
+  return res
 }
 
 export default Loading
