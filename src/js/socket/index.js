@@ -8,7 +8,7 @@ const createSocket = name => {
   })
 
   socket.on('offline', data => {
-      onsole.log(`${data.name} is offline`)
+    console.log(`${data.name} is offline`)
   })
 
   socket.emit('online', { name })
