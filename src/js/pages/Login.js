@@ -30,7 +30,6 @@ class Login extends React.Component{
     } else {
       this.setState({error: true})
     }
-    
   }
 
   doLogout = () => {
@@ -41,7 +40,7 @@ class Login extends React.Component{
   handleChange = name => this.setState({ name, error: !name })
 
   showAlert = () => {
-    alert('Logout', 'Are you sure???', [
+    alert(this.props.store.name, 'Are you sure???', [
       { text: 'Cancel', onPress: () => console.log('cancel') },
       { text: 'Ok', onPress: this.doLogout }
     ])

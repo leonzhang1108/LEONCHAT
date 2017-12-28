@@ -8,7 +8,7 @@ import config from '../config'
 import socketio from 'socket.io'
 import kstatic from 'koa-static'
 import convert from 'koa-convert'
-import { log, createSocket } from './util'
+import { createSocket } from './util'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
 import webpackConfig from '../build/webpack.dev.conf'

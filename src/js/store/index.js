@@ -3,7 +3,7 @@ import { observable, action } from 'mobx'
 
 class Store {
   // 被观察者
-  @observable name 
+  @observable name ='leon'
   @observable socket 
 
   @action changeName = val => {

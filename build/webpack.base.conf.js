@@ -16,7 +16,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.json', '.scss'],
+    extensions: ['.js', '.json', '.scss', '.png'],
     alias: {
       antd: 'antd-mobile',
       style: resolve('src/style'),
@@ -36,6 +36,9 @@ module.exports = {
     }, {
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader']
+    }, {
+      test: /\.(png|jpg|gif)$/,
+      loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]',
     }]
   }
 }

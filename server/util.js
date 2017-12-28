@@ -1,9 +1,7 @@
 import chalk from 'chalk'
 import socketio from 'socket.io'
 
-const log = (msg, color = 'white') => {
-  console.log(chalk[color](msg))
-}
+const log = (msg, color = 'white') => console.log(chalk[color](msg))
 
 const createSocket = httpServer => {
   const io = socketio.listen(httpServer)
