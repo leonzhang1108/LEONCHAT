@@ -6,6 +6,7 @@ const PlaceHolder = ({ className = '', ...restProps }) => (
   <div className={`${className} placeholder`} {...restProps}>Block</div>
 )
 
+
 const Index = props => (
   <div style={{ padding: '15px 0', height: '100%' }}>
     <WingBlank><PlaceHolder /></WingBlank>

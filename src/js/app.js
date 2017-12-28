@@ -5,7 +5,6 @@ import TabRouter from 'components/TabRouter'
 import { Switch, Route } from 'react-router-dom'
 import 'style/app'
 
-
 const renderRoute = (config, index) => <Route exact key={index} path={`/${config.path}`} component={load(config.title)}/>
 
 const App = props => (

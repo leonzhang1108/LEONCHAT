@@ -2,6 +2,7 @@ import React from 'react'
 import 'style/pages/login'
 import { InputItem, List, Flex, Button, WingBlank, WhiteSpace, Modal } from 'antd'
 import { createSocket } from 'socket'
+import Layout from 'components/Layout'
 import { observer, inject } from 'mobx-react'
 
 const alert = Modal.alert 
@@ -63,12 +64,8 @@ class Login extends React.Component{
 
     if(store.socket) renderDom = <WingBlank className="w80"><Button type="primary" onClick={this.showAlert}>Logout</Button></WingBlank>
 
-    return (
-      <Flex justify='center' style={{ height: '100%', width: '100%' }}>
-        { renderDom }
-      </Flex>
-    )
+    return renderDom
   }
 }
 
-export default Login
+export default Layout(Login)
