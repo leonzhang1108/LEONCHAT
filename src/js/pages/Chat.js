@@ -12,9 +12,6 @@ class Chat extends React.Component {
   toLogin = () => {
     this.props.history.push(`/login`)
   }
-  componentDidMount = () => {
-    console.log(this.props)
-  }
   render() {
     let string = <Button type="primary" onClick={this.toLogin}>click to login</Button>
     let name = this.props.store.name

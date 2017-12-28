@@ -3,12 +3,12 @@ import opn from 'opn'
 import path from 'path'
 import http from 'http'
 import router from './router'
-import { log } from './util'
 import webpack from 'webpack'
 import config from '../config'
 import socketio from 'socket.io'
 import kstatic from 'koa-static'
 import convert from 'koa-convert'
+import { log, createSocket } from './util'
 import wdm from "koa-webpack-dev-middleware"
 import whm from "koa-webpack-hot-middleware"
 import webpackConfig from '../build/webpack.dev.conf'
@@ -55,23 +55,4 @@ const httpServer = http.Server(app.callback())
 httpServer.listen(port, err => console.log(err || `Server started on port ${port}`))
 
 // socket.io
-const io = socketio.listen(httpServer)
-
-io.on('connection', socket => {
-
-
-  // 上线
-  socket.on('online', data => {
-    log(`${data.name} is online`, 'green')
-    socket.broadcast.emit('online', data)
-  })
-
-  socket.on('offline', data => {
-    log(`${data.name} is offline`, 'gray')
-    socket.broadcast.emit('offline', data)
-  })
-
-  socket.on('disconnect', data => {
-    log(data)
-  })
-})
+createSocket(httpServer)
