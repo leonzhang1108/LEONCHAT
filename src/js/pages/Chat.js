@@ -1,6 +1,6 @@
 import React from 'react'
 import 'style/pages/chat'
-import { Button } from 'antd'
+import { Flex, Button } from 'antd'
 import { observer, inject } from 'mobx-react'
 
 @inject("store")
@@ -13,10 +13,10 @@ class Chat extends React.Component {
     this.props.history.push(`/login`)
   }
   render() {
-    let string = <Button type="primary" onClick={this.toLogin}>click to login</Button>
+    let string = <Button className="w80" type="primary" onClick={this.toLogin}>click to login</Button>
     let name = this.props.store.name
     name && (string = `welcome ${name}`)
-    return <div>{string}</div>
+    return <Flex justify='center' style={{ height: '100%', width: '100%' }}>{string}</Flex>
   }
 }
 

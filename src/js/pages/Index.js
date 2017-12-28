@@ -1,15 +1,19 @@
 import React from 'react'
-import { Layout } from 'antd'
 import 'style/pages/index'
+import { WingBlank, WhiteSpace } from 'antd'
 
-const { Header, Footer, Content } = Layout
+const PlaceHolder = ({ className = '', ...restProps }) => (
+  <div className={`${className} placeholder`} {...restProps}>Block</div>
+)
 
 const Index = props => (
-  <Layout>
-    <Header>index header</Header>
-    <Content>index content</Content>
-    <Footer>index footer</Footer>
-  </Layout>
+  <div style={{ padding: '15px 0', height: '100%' }}>
+    <WingBlank><PlaceHolder /></WingBlank>
+    <WhiteSpace size="lg" />
+    <WingBlank size="md"><PlaceHolder /></WingBlank>
+    <WhiteSpace size="lg" />
+    <WingBlank size="sm"><PlaceHolder /></WingBlank>
+  </div>
 )
 
 export default Index

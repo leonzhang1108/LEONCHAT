@@ -1,21 +1,7 @@
 #app {
-  .container {
+  .am-tab-bar-item {
     height: 100%;
-    .ant-layout-header {
-      z-index: 2;
-      .ant-row .ant-col-8 {
-        text-align: center;
-      }
-    }
-    
-    .components {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      top: 64px;
-    }
+    justify-content: center;
+    align-items: center;
   }
 }

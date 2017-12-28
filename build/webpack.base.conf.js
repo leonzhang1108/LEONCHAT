@@ -1,6 +1,10 @@
 import path from 'path'
 const resolve = dir => path.join(__dirname, '..', dir)
 
+const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components']
+const jsFolderAlias = {}
+jsFolders.forEach(folder => jsFolderAlias[folder] = resolve(`src/js/${folder}`))
+
 module.exports = {
   entry: {
     app: './src/js/main.js'
@@ -14,14 +18,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.scss'],
     alias: {
+      antd: 'antd-mobile',
       style: resolve('src/style'),
       img: resolve('src/img'),
       js: resolve('src/js'),
-      pages: resolve('src/js/pages'),
-      utils: resolve('src/js/utils'),
-      store: resolve('src/js/store'),
-      socket: resolve('src/js/socket'),
-      components: resolve('src/js/components')
+      ...jsFolderAlias
     }
   },
   module: {
