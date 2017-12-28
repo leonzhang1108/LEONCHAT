@@ -12,9 +12,31 @@
     line-height: 50px;
     z-index: 1;
   }
-  .chat-history {
-    overflow: scroll;
+  .chat-history-wrapper {
+    padding: 50px 0 44px 0px;
     height: 100%;
-    padding-top: 50px; 
+    .chat-history {
+      overflow: scroll;
+      height: 100%;
+    } 
+  }
+  .chat-input {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    input {
+      padding-right: 60px;
+    }
+    .am-input-error-extra {
+      margin-right: 60px;
+    }
+  }
+  .chat-button {
+    margin-right: 0!important;
+    float: right;
+    height: 44px;
+    line-height: 44px;
+    font-size: 15px;
+    border-radius: 0;
   }
 }

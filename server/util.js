@@ -18,6 +18,11 @@ const createSocket = httpServer => {
       socket.broadcast.emit('offline', data)
     })
 
+    socket.on('send', data => {
+      log(`${data.name}: ${data.content}`, 'green')
+      socket.broadcast.emit('send', data)
+    })
+
     socket.on('disconnect', data => {
       log(data)
     })

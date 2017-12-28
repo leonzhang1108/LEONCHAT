@@ -13,9 +13,14 @@ class Chat extends React.Component {
   constructor(props) {
     super(props)
   }
-  toLogin = () => {
-    this.props.history.push(`/login`)
+
+  componentDidMount = () => {
+    const { socket, addChatHistory } = this.props.store
+    socket && socket.on('send', res => addChatHistory(res))
   }
+
+  toLogin = () => this.props.history.push(`/login`)
+  
   render() {
     let component = <Button className="w80" type="primary" onClick={this.toLogin}>click to login</Button>
     let name = this.props.store.name

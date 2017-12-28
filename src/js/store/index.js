@@ -8,6 +8,27 @@ class Store {
   @observable chatHistory = [{
     name: 'leonzhang',
     content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
+  },{
+    name: 'leonzhang',
+    content: 'fuck the regulation'
   }]
 
   @action changeName = val => {
@@ -27,6 +48,15 @@ class Store {
 
   @action addChatHistory = res => {
     this.chatHistory.push(res)
+  }
+
+  @action addChatHistoryAndSend = content => {
+    const res = {
+      content,
+      name: this.name
+    }
+    this.chatHistory.push(res)
+    this.socket.emit('send', res)
   }
 
 }
