@@ -14,10 +14,17 @@ class Login extends React.Component{
    }
 
    doLogin = name => {
+    if(!name) return
     const { store, history } = this.props
-    store.changeNickname(name)
+    store.changeName(name)
     store.addSocket(createSocket(name))
     history.push(`/chat`)
+   }
+
+   doLogout = () => {
+    console.log('logout')
+    const { store, history } = this.props
+    store.clearSocket()
    }
 
    render() {
@@ -25,7 +32,7 @@ class Login extends React.Component{
     const { store } = this.props
 
     let renderDom = <Search placeholder="your nickname" onSearch={this.doLogin} enterButton="Login" />
-    if(store.socket) renderDom = 'click to logout'
+    if(store.socket) renderDom = <Button type="primary" onClick={this.doLogout}>Login out</Button>
 
     return (
       <div className='login-input-wrap'>

@@ -17,8 +17,8 @@ class Chat extends React.Component {
   }
   render() {
     let string = <Button type="primary" onClick={this.toLogin}>click to login</Button>
-    let nickname = this.props.store.nickname
-    nickname && (string = `welcome ${nickname}`)
+    let name = this.props.store.name
+    name && (string = `welcome ${name}`)
     return <div>{string}</div>
   }
 }
