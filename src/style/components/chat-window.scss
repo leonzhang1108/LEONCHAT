@@ -1,9 +1,20 @@
+@import '../base/color';
 .chat-wrapper {
   height: 100%;
   width: 100%;
   .chat-welcome {
     text-align: center;
-    margin: 16px;
     font-size: 20px;
+    position: absolute;
+    width: 100%;
+    background: $bg-color;
+    height: 50px;
+    line-height: 50px;
+    z-index: 1;
+  }
+  .chat-history {
+    overflow: scroll;
+    height: 100%;
+    padding-top: 50px; 
   }
 }
