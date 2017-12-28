@@ -22,7 +22,7 @@ const TabRouter = props => {
 
   return (
     <TabBar
-      unselectedTintColor='#949494'
+      unselectedTintColor='#ebebef'
       tintColor='#33A3F4'
       barTintColor='white'
     >

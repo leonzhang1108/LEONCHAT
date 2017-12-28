@@ -13,29 +13,31 @@ class Login extends React.Component{
     super(props)
   }
 
-  state = { 
-    visible: false,
+  state = {
+    error: false,
     name: ''
   }
 
   doLogin = () => {
     const { name } = this.state
-    if(!name) return
-    const { store, history } = this.props
-    store.changeName(name)
-    store.addSocket(createSocket(name))
-    history.push(`/chat`)
+    if(name) {
+      const { store, history } = this.props
+      store.changeName(name)
+      store.addSocket(createSocket(name))
+      this.setState({error: false})
+      history.push(`/chat`)
+    } else {
+      this.setState({error: true})
+    }
+    
   }
 
   doLogout = () => {
     const { store } = this.props
     store.clearSocket()
-    this.hideModal()
   }
 
-  hideModal = () => this.setState({ visible: false })
-
-  handleChange = name => this.setState({ name })
+  handleChange = name => this.setState({ name, error: !name })
 
   showAlert = () => {
     alert('Logout', 'Are you sure???', [
@@ -47,11 +49,11 @@ class Login extends React.Component{
   render() {
     
     const { store } = this.props
-    const { visible } = this.state
+    const { error } = this.state
 
     let renderDom = (
       <WingBlank className="w80">
-        <InputItem placeholder="your nickname" onChange={this.handleChange} >
+        <InputItem placeholder="your nickname" onChange={this.handleChange} error={error} >
           <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />
         </InputItem>
         <WhiteSpace size='xl' />
