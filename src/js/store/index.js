@@ -31,7 +31,7 @@ class Store {
   }
 
   @action addChatHistory = res => {
-    this.chatHistory.push(res)
+    res && this.chatHistory.push(res)
   }
 
   @action addChatHistoryAndSend = content => {

@@ -51,8 +51,8 @@ class ChatWindow extends React.Component {
                 if(chatItem.user) {
                   const { id } = chatItem.user
                   return id === user.id 
-                      ? <ChatItem key={i} {...chatItem} self /> 
-                      : <ChatItem key={i} {...chatItem} friends />
+                    ? <ChatItem key={i} {...chatItem} self /> 
+                    : <ChatItem key={i} {...chatItem} friends />
                 } else {
                   return <ChatItem key={i} {...chatItem} /> 
                 }
