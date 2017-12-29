@@ -1,5 +1,4 @@
 # LeonChat
-
-> yarn
-
-> npm run dev
+> react + antd-mobile + koa2 + socket.io
+* yarn
+* npm run dev

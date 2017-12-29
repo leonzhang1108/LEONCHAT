@@ -2,7 +2,10 @@
   input {
     text-align: center;
   }
-  .am-input-label.am-input-label-5 {
-    width: auto;
+  .am-list-line {
+    border-bottom: none!important;
+    .am-input-label.am-input-label-5 {
+      width: auto;
+    }
   }
 }
