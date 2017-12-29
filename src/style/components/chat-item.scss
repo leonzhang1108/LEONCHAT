@@ -70,5 +70,14 @@ $content-frame-color: #fff;
       border-left-color: $content-frame-color;
     }
   }
-  
+}
+.msg-item-wrapper {
+  text-align: center;
+  margin: 10px 0;
+  .msg-item {
+    display: inline-block;
+    padding: 5px 20px;
+    background: #ccc;
+    border-radius: 10px;
+  }
 }

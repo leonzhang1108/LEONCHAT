@@ -23,9 +23,9 @@ class ChatWindow extends React.Component {
     const { input } = this.refs
     const { addChatHistoryAndSend } = this.props.store
     if(value) {
+      addChatHistoryAndSend(value)
       this.setState({value: '', error: false})
       input.state.value = ''
-      addChatHistoryAndSend(value)
     } else {
       this.setState({ error: true})
     }
@@ -38,20 +38,25 @@ class ChatWindow extends React.Component {
   }
 
   render() {
-    const { name, store } = this.props
+    const { user, store } = this.props
     const { chatHistory } = store
     const { error } = this.state
     return (
       <div className="chat-wrapper">
-        <div className="chat-welcome">{`welcome, ${name}`}</div>
+        <div className="chat-welcome">{`welcome, ${user.name}`}</div>
         <div className="chat-history-wrapper">
           <div className="chat-history" ref="historyForm">
             {
-              chatHistory.map(
-                (chatItem, i) => chatItem.name === name 
-                    ? <ChatItem key={i} {...chatItem} self /> 
-                    : <ChatItem key={i} {...chatItem} friends />
-              ) 
+              chatHistory.map((chatItem, i) => {
+                if(chatItem.user) {
+                  const { id } = chatItem.user
+                  return id === user.id 
+                      ? <ChatItem key={i} {...chatItem} self /> 
+                      : <ChatItem key={i} {...chatItem} friends />
+                } else {
+                  return <ChatItem key={i} {...chatItem} /> 
+                }
+              }) 
             }
           </div>
           <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder="Input" error={error}/>

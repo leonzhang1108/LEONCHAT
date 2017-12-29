@@ -23,7 +23,7 @@ class Login extends React.Component{
     const { name } = this.state
     if(name) {
       const { store, history } = this.props
-      store.changeName(name)
+      store.doLogin(name)
       store.addSocket(createSocket(name))
       this.setState({error: false})
       history.push(`/chat`)

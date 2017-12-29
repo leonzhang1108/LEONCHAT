@@ -3,11 +3,17 @@ import 'style/components/chat-item'
 import avatar from 'img/avatar/avatar'
 
 const ChatItem = props => {
-  const { name, content } = props
-  let chatItem
+  const { user, content, msg } = props
+  
+  let chatItem = (
+    <div className="msg-item-wrapper">
+      <div className="msg-item">{msg}</div>
+    </div>
+  )
+
   let contentWrapper = (
     <div className='chat-content-wrapper'>
-      <div className='chat-nickname'>{name}</div>
+      <div className='chat-nickname'>{user && user.name}</div>
       <div className="chat-content">{content}</div>
     </div>
   )

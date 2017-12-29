@@ -3,36 +3,21 @@ import { observable, action } from 'mobx'
 
 class Store {
   // 被观察者
-  @observable name
+  @observable user
   @observable socket
-  @observable chatHistory = [{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  },{
-    name: 'leonzhang',
-    content: 'fuck the regulation'
-  }]
+  @observable chatHistory = []
 
-  @action changeName = val => {
-    this.name = val
+  clearLocal = () => {
+    this.socket = null
+    this.user = null
+    this.chatHistory = []
+  }
+
+  @action doLogin = name => {
+    this.user = {
+      name,
+      id: Date.now() * Math.random()
+    }
   }
 
   @action addSocket = socket => {
@@ -40,10 +25,9 @@ class Store {
   }
 
   @action clearSocket = () => {
-    this.socket.emit('offline', { name: this.name })
+    this.socket.emit('offline', this.user)
     this.socket.disconnect()
-    this.socket = null
-    this.name = null
+    this.clearLocal()
   }
 
   @action addChatHistory = res => {
@@ -53,8 +37,9 @@ class Store {
   @action addChatHistoryAndSend = content => {
     const res = {
       content,
-      name: this.name
+      user: this.user
     }
+    console.log(res)
     this.chatHistory.push(res)
     this.socket.emit('send', res)
   }

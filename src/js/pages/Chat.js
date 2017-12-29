@@ -23,8 +23,8 @@ class Chat extends React.Component {
   
   render() {
     let component = <Button className="w80" type="primary" onClick={this.toLogin}>click to login</Button>
-    let name = this.props.store.name
-    name && (component = <ChatWindow name={name}/>)
+    let user = this.props.store.user
+    user && (component = <ChatWindow user={user}/>)
     return component
   }
 }

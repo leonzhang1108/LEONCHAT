@@ -8,23 +8,31 @@ const createSocket = httpServer => {
 
   io.on('connection', socket => {
     // 上线
-    socket.on('online', data => {
-      log(`${data.name} is online`, 'green')
-      socket.broadcast.emit('online', data)
+    socket.on('online', user => {
+      log(`${user.name} is online`, 'green')
+      socket.broadcast.emit('send', {
+        msg: `${user.name} is online. `
+      })
+    })
+    
+    // 下线
+    socket.on('offline', user => {
+      log(`${user.name} is offline`, 'gray')
+      socket.broadcast.emit('send', {
+        msg: `${user.name} is offline. `
+      })
     })
 
-    socket.on('offline', data => {
-      log(`${data.name} is offline`, 'gray')
-      socket.broadcast.emit('offline', data)
+    // 发送信息
+    socket.on('send', res => {
+      const { user } = res
+      log(`${user.name}: ${res.content}`, 'green')
+      socket.broadcast.emit('send', res)
     })
 
-    socket.on('send', data => {
-      log(`${data.name}: ${data.content}`, 'green')
-      socket.broadcast.emit('send', data)
-    })
-
-    socket.on('disconnect', data => {
-      log(data)
+    // 断开连接
+    socket.on('disconnect', user => {
+      log(user)
     })
   })
 }

@@ -3,12 +3,12 @@ import io from 'socket.io-client'
 const createSocket = name => {
   const socket = io.connect('http://localhost:3000')
 
-  socket.on('online', data => {
-    console.log(`${data.name} is online`)
+  socket.on('online', user => {
+    console.log(`${user.name} is online`)
   })
 
-  socket.on('offline', data => {
-    console.log(`${data.name} is offline`)
+  socket.on('offline', user => {
+    console.log(`${user.name} is offline`)
   })
 
   socket.emit('online', { name })
