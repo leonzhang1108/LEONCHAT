@@ -1,2 +1,5 @@
 # LeonChat
-chatchatchat
+
+> yarn
+
+> npm run dev
