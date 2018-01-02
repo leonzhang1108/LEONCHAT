@@ -3,9 +3,8 @@ import socketio from 'socket.io'
 
 const log = (msg, color = 'white') => console.log(chalk[color](msg))
 
-const createSocket = httpServer => {
+const createSocket = (httpServer, store) => {
   const io = socketio.listen(httpServer)
-
   io.on('connection', socket => {
     // 上线
     socket.on('online', user => {
@@ -37,6 +36,8 @@ const createSocket = httpServer => {
       log(user)
     })
   })
+
+  return io
 }
 
 module.exports = {

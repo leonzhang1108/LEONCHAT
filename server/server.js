@@ -2,9 +2,10 @@ import Koa from 'koa'
 import opn from 'opn'
 import path from 'path'
 import http from 'http'
-import router from './router'
+import api from './api'
 import webpack from 'webpack'
 import config from '../config'
+import Router from 'koa-router'
 import kstatic from 'koa-static'
 import convert from 'koa-convert'
 import { createSocket } from './util'
@@ -35,6 +36,13 @@ const hotMiddleware = whm(compiler, {
 app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
 
+
+let router = new Router()
+let store = []
+let apiRouter = api.init(store)
+
+router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
+
 app
   .use(router.routes())
   .use(router.allowedMethods())
@@ -54,4 +62,4 @@ const httpServer = http.Server(app.callback())
 httpServer.listen(port, err => console.log(err || `Server started on port ${port}`))
 
 // socket.io
-createSocket(httpServer)
+createSocket(httpServer, store)

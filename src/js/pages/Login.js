@@ -4,6 +4,7 @@ import { InputItem, List, Flex, Button, WingBlank, WhiteSpace, Modal } from 'ant
 import { createSocket } from 'socket'
 import Layout from 'components/Layout'
 import { observer, inject } from 'mobx-react'
+import fetch from 'utils/fetch'
 
 const alert = Modal.alert 
 
@@ -17,6 +18,14 @@ class Login extends React.Component{
   state = {
     error: false,
     name: ''
+  }
+  componentDidMount = () => {
+    fetch.get('/api').then(res => {
+      console.log(res)
+    })
+    fetch.get('/api/add').then(res => {
+      console.log(res)
+    })
   }
 
   doLogin = () => {

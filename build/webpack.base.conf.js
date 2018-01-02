@@ -1,7 +1,7 @@
 import path from 'path'
 const resolve = dir => path.join(__dirname, '..', dir)
 
-const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components']
+const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components', 'config']
 const jsFolderAlias = {}
 jsFolders.forEach(folder => jsFolderAlias[folder] = resolve(`src/js/${folder}`))
 
