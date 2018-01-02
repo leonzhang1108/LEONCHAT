@@ -10,7 +10,7 @@ const createSocket = httpServer => {
     // 上线
     socket.on('online', user => {
       log(`${user.name} is online`, 'green')
-      socket.broadcast.emit('send', {
+      io.emit('send', {
         msg: `${user.name} is online. `
       })
     })
