@@ -16,18 +16,20 @@ class ChatWindow extends React.Component {
     error: false
   }
 
-  handleChange = value => this.setState({ value, error: !value  })
+  handleChange = value => this.setState({ value, error: !value })
 
-  doSend = () => {
+  setStateAsync = state => new Promise(resolve => this.setState(state, resolve))
+
+  doSend = async () => {
     const { value } = this.state
     const { input } = this.refs
     const { addChatHistoryAndSend } = this.props.store
     if(value) {
       addChatHistoryAndSend(value)
-      this.setState({value: '', error: false})
+      await this.setStateAsync({value: '', error: false})
       input.state.value = ''
     } else {
-      this.setState({ error: true})
+      await this.setStateAsync({error: true})
     }
     this.scrollToBottom()
   }
