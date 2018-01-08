@@ -1,10 +1,8 @@
 import React from 'react'
 import 'style/pages/login'
 import { InputItem, List, Flex, Button, WingBlank, WhiteSpace, Modal } from 'antd'
-import { createSocket } from 'socket'
 import Layout from 'components/Layout'
 import { observer, inject } from 'mobx-react'
-import fetch from 'utils/fetch'
 
 const alert = Modal.alert 
 
@@ -19,23 +17,16 @@ class Login extends React.Component{
     error: false,
     name: ''
   }
-  componentDidMount = () => {
-    fetch.get('/api/add').then(res => {
-      console.log(res)
-    })
-  }
 
   doLogin = () => {
     const { name } = this.state
     if(name) {
       const { store, history } = this.props
       store.doLogin(name)
-      store.addSocket(createSocket(name))
-      this.setState({error: false})
       history.push(`/chat`)
-    } else {
-      this.setState({error: true})
     }
+
+    this.setState({error: !name})
   }
 
   doLogout = () => {

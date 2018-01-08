@@ -17,7 +17,13 @@ const addHistory = async ({ user, content }) => {
   await query(sql, [user.name, content])
 }
 
+const getHistory = async () => {
+  let sql = `SELECT NAME, CONTENT FROM chat_history order by CREATEDATE desc LIMIT 10;`
+  return await query(sql)
+}
+
 
 module.exports = {
-  initTable, addHistory
+  initTable, addHistory,
+  getHistory
 }

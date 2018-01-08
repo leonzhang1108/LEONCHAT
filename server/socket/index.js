@@ -32,9 +32,7 @@ const createSocket = (httpServer, store) => {
     })
 
     // 断开连接
-    socket.on('disconnect', msg => {
-      log(msg, 'red')
-    })
+    socket.on('disconnect', msg => log(msg, 'red'))
   })
 
   return io

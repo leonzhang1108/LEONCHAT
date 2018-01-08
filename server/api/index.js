@@ -1,4 +1,5 @@
 import Router from 'koa-router'
+import sql from '../sql'
 
 let init = store => {
   const router = new Router()
@@ -15,6 +16,20 @@ let init = store => {
     ctx.body = {
       msg: store
     }
+  })
+
+  router.get('/getHistory', async (ctx, next) => {
+    const list = await sql.getHistory()
+
+    let transferdList = list.map(item => ({
+      user: {
+        name: item.NAME,
+        id: ''
+      },
+      content: item.CONTENT
+    }))
+
+    ctx.body = transferdList
   })
 
   return router
