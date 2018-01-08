@@ -20,9 +20,6 @@ class Login extends React.Component{
     name: ''
   }
   componentDidMount = () => {
-    fetch.get('/api').then(res => {
-      console.log(res)
-    })
     fetch.get('/api/add').then(res => {
       console.log(res)
     })

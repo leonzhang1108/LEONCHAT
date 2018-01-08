@@ -24,7 +24,8 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html'
+      template: 'src/index.html',
+      inject: false
     }),
     new FriendlyErrorsPlugin(),
     // 进度条
