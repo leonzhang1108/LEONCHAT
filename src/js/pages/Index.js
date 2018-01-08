@@ -1,20 +1,31 @@
 import React from 'react'
+import PullToRefresh from 'components/ChatPullToRefresh'
+
 import 'style/pages/index'
-import { WingBlank, WhiteSpace } from 'antd'
 
-const PlaceHolder = ({ className = '', ...restProps }) => (
-  <div className={`${className} placeholder`} {...restProps}>Block</div>
-)
+const genData = () => {
+  const dataArr = []
+  for (let i = 0; i < 5; i++) {
+    dataArr.push(i)
+  }
+  return dataArr
+}
 
 
-const Index = props => (
-  <div style={{ padding: '15px 0', height: '100%' }}>
-    <WingBlank><PlaceHolder /></WingBlank>
-    <WhiteSpace size="lg" />
-    <WingBlank size="md"><PlaceHolder /></WingBlank>
-    <WhiteSpace size="lg" />
-    <WingBlank size="sm"><PlaceHolder /></WingBlank>
-  </div>
-)
+class Index extends React.Component {
+  
+
+  render() {
+    return (
+      <PullToRefresh>
+        {genData().map(i => (
+          <div key={i} style={{ textAlign: 'center', padding: 20 }}>
+            pull down {i}
+          </div>
+        ))}
+      </PullToRefresh>
+    )
+  }
+}
 
 export default Index

@@ -1,5 +1,6 @@
 import React from 'react'
 import ChatItem from 'components/ChatItem'
+import PullToRefresh from 'components/ChatPullToRefresh'
 import 'style/components/chat-window'
 import { observer, inject } from 'mobx-react'
 import { InputItem, Button } from 'antd'

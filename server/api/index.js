@@ -21,16 +21,14 @@ let init = store => {
   router.get('/getHistory', async (ctx, next) => {
     const list = await sql.getHistory()
 
-    let transferdList = list.map(item => ({
+    ctx.body = list.map(item => ({
       user: {
         name: item.name,
         id: ''
       },
       content: item.content
     }))
-
-    ctx.body = transferdList
-  })
+  })  
 
   return router
 }
