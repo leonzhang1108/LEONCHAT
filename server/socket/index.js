@@ -8,8 +8,9 @@ const createSocket = (httpServer, store) => {
     // 上线
     socket.on('online', user => {
       log(`${user.name} is online`, 'green')
-      // 发送所有人 包括自己
-      io.emit('send', {
+      // io.emit: 发送所有人 包括自己
+      // socket.broadcast.emit: 发送所有人 不包括自己
+      socket.broadcast.emit('send', {
         msg: `${user.name} is online. `
       })
     })
@@ -17,7 +18,6 @@ const createSocket = (httpServer, store) => {
     // 下线
     socket.on('offline', user => {
       log(`${user.name} is offline`, 'gray')
-      // 发送所有人 不包括自己
       socket.broadcast.emit('send', {
         msg: `${user.name} is offline. `
       })

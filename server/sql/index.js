@@ -18,7 +18,8 @@ const addHistory = async ({ user, content }) => {
 }
 
 const getHistory = async () => {
-  let sql = `SELECT NAME, CONTENT FROM chat_history order by CREATEDATE desc LIMIT 10;`
+  // 获取最新5条
+  let sql = `SELECT name, content FROM chat_history WHERE id > (SELECT MAX(id) FROM chat_history) - 5;`
   return await query(sql)
 }
 

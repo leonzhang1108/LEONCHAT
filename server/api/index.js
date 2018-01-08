@@ -23,10 +23,10 @@ let init = store => {
 
     let transferdList = list.map(item => ({
       user: {
-        name: item.NAME,
+        name: item.name,
         id: ''
       },
-      content: item.CONTENT
+      content: item.content
     }))
 
     ctx.body = transferdList
