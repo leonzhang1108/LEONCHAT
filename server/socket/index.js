@@ -1,7 +1,6 @@
-import chalk from 'chalk'
 import socketio from 'socket.io'
-
-const log = (msg, color = 'white') => console.log(chalk[color](msg))
+import { addHistory } from '../sql'
+import { log } from '../util'
 
 const createSocket = (httpServer, store) => {
   const io = socketio.listen(httpServer)
@@ -28,12 +27,13 @@ const createSocket = (httpServer, store) => {
     socket.on('send', res => {
       const { user } = res
       log(`${user.name}: ${res.content}`, 'green')
+      addHistory(res)
       socket.broadcast.emit('send', res)
     })
 
     // 断开连接
-    socket.on('disconnect', user => {
-      log(user)
+    socket.on('disconnect', msg => {
+      log(msg, 'red')
     })
   })
 
@@ -41,5 +41,5 @@ const createSocket = (httpServer, store) => {
 }
 
 module.exports = {
-  log, createSocket
+  createSocket
 }

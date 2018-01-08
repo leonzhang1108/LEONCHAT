@@ -8,9 +8,10 @@ import config from '../config'
 import Router from 'koa-router'
 import kstatic from 'koa-static'
 import convert from 'koa-convert'
-import { createSocket } from './util'
-import wdm from "koa-webpack-dev-middleware"
-import whm from "koa-webpack-hot-middleware"
+import { createSocket } from './socket'
+import wdm from 'koa-webpack-dev-middleware'
+import whm from 'koa-webpack-hot-middleware'
+import { initTable } from './sql'
 import webpackConfig from '../build/webpack.dev.conf'
 import historyFallback from 'koa2-history-api-fallback'
 
@@ -32,6 +33,9 @@ const devMiddleware = wdm(compiler, {
 const hotMiddleware = whm(compiler, {
   log: () => {}
 })
+
+// 初始化数据库
+initTable()
 
 app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
