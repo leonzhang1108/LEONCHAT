@@ -11,9 +11,10 @@ const genData = () => {
   return dataArr
 }
 
+const onRefresh = () => new Promise(resolve => setTimeout(() => resolve(true), 1000))
 
 const Index = ({ className }) => (
-  <PullToRefresh className>
+  <PullToRefresh className onRefresh={onRefresh}>
     {genData().map(i => (
       <div key={i} style={{ textAlign: 'center', padding: 20 }}>
         pull down {i}
