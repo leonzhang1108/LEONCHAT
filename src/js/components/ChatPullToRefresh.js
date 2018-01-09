@@ -11,6 +11,8 @@ class ChatPullToRefresh extends React.Component {
     refreshing: false
   }
 
+  setStateAsync = state => new Promise(resolve => this.setState(state, resolve))
+
   render() {
 
     const { children, onRefresh } = this.props
@@ -30,9 +32,9 @@ class ChatPullToRefresh extends React.Component {
         direction="down"
         refreshing={this.state.refreshing}
         onRefresh={async () => {
-          this.setState({ refreshing: true })
+          this.setStateAsync({ refreshing: true })
           const res = await onRefresh()
-          this.setState({ refreshing: !res })
+          this.setStateAsync({ refreshing: !res })
         }}
       >
         {children}

@@ -18,11 +18,17 @@ class ChatWindow extends React.Component {
     error: false
   }
 
+  componentDidMount = () => {
+    const { socket, addChatHistory } = this.props.store
+    socket && socket.on('send', res => {
+      addChatHistory(res)
+      this.scrollToBottom()
+    })
+  }
+
   handleChange = value => this.setState({ value, error: !value })
 
   setStateAsync = state => new Promise(resolve => this.setState(state, resolve))
-
-  componentDidUpdate = () => this.scrollToBottom()
 
   doSend = async () => {
     const { value } = this.state
@@ -50,8 +56,8 @@ class ChatWindow extends React.Component {
   }
 
   render() {
-    const { user, store } = this.props
-    const { chatHistory } = store
+    const { store } = this.props
+    const { chatHistory, user } = store
     const { error } = this.state
     
     return (
