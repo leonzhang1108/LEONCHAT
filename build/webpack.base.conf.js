@@ -1,4 +1,5 @@
 import path from 'path'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 const resolve = dir => path.join(__dirname, '..', dir)
 
 const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components', 'config', 'api']
@@ -33,10 +34,16 @@ module.exports = {
       include: [resolve('src')]
     }, {
       test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader'
+      })
     }, {
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
+      exclude: /node_modules/,
+      use: ExtractTextPlugin.extract({
+        use: ['css-loader', 'sass-loader']
+      })
     }, {
       test: /\.(png|jpg|gif)$/,
       loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]',

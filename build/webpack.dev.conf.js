@@ -3,8 +3,9 @@ import config from '../config'
 import merge from 'webpack-merge'
 import baseWebpackConfig from './webpack.base.conf'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
@@ -30,7 +31,9 @@ module.exports = merge(baseWebpackConfig, {
     new FriendlyErrorsPlugin(),
     // 进度条
     new ProgressBarPlugin(),
-    // 公用提取
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' })
+    // 公用JS提取
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
+    // 公用样式提取
+    new ExtractTextPlugin("styles.css")
   ]
 })
