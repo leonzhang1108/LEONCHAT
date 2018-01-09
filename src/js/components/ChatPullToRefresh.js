@@ -13,7 +13,7 @@ class ChatPullToRefresh extends React.Component {
 
   render() {
 
-    const { children } = this.props
+    const { children, onRefresh } = this.props
 
     return (
       <PullToRefresh
@@ -29,9 +29,10 @@ class ChatPullToRefresh extends React.Component {
         }}
         direction="down"
         refreshing={this.state.refreshing}
-        onRefresh={() => {
+        onRefresh={async () => {
           this.setState({ refreshing: true })
-          setTimeout(() => this.setState({ refreshing: false }), 1000)
+          const res = await onRefresh()
+          this.setState({ refreshing: !res })
         }}
       >
         {children}

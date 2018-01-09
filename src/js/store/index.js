@@ -14,7 +14,9 @@ class Store {
     this.chatHistory = []
   }
 
-  @action doLogin = name => {
+  getHistory = async() => await getHistory()
+
+  @action doLogin = async name => {
     this.user = {
       name,
       id: Date.now() * Math.random()
@@ -22,10 +24,13 @@ class Store {
 
     this.socket = createSocket(name)
 
-    this.getHistory()
+    this.chatHistory = await this.getHistory()
   }
 
-  @action getHistory = async () => this.chatHistory = await getHistory()
+  @action pullDownRefreshHistory = async() => {
+    const history = await this.getHistory()
+    this.chatHistory.unshift(...history)
+  }
 
   @action clearSocket = () => {
     this.socket.emit('offline', this.user)

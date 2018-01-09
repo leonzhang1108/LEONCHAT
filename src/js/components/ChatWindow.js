@@ -41,8 +41,10 @@ class ChatWindow extends React.Component {
     ptr.scrollTop = ptr.scrollHeight
   }
 
-  onRefresh = () => {
-
+  onRefresh = async () => {
+    const { pullDownRefreshHistory } = this.props.store
+    await pullDownRefreshHistory()
+    return true
   }
 
   render() {
