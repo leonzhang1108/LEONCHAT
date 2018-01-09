@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import ChatItem from 'components/ChatItem'
 import PullToRefresh from 'components/ChatPullToRefresh'
 import 'style/components/chat-window'
@@ -36,8 +37,8 @@ class ChatWindow extends React.Component {
   }
 
   scrollToBottom = () => {
-    const { historyForm } = this.refs
-    historyForm.scrollTop = historyForm.scrollHeight
+    let ptr = ReactDOM.findDOMNode(this.ptr)
+    ptr.scrollTop = ptr.scrollHeight
   }
 
   render() {
@@ -48,7 +49,8 @@ class ChatWindow extends React.Component {
       <div className="chat-wrapper">
         <div className="chat-welcome">{`welcome, ${user.name}`}</div>
         <div className="chat-history-wrapper">
-          <div className="chat-history" ref="historyForm">
+          <PullToRefresh ref={el => this.ptr = el}>
+          <div className="chat-history">
             {
               chatHistory.map((chatItem, i) => {
                 if(chatItem.user) {
@@ -62,6 +64,7 @@ class ChatWindow extends React.Component {
               }) 
             }
           </div>
+          </PullToRefresh>
           <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder="Input" error={error}/>
           <Button onClick={this.doSend} className="chat-button" type="primary" inline size="small" style={{ marginRight: '4px' }}>send</Button>
         </div>
