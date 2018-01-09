@@ -20,18 +20,19 @@ const addHistory = async ({ user, content }) => {
 // 向上获取5条
 const getHistory = async page => {
 
-  let limit = 5
-  if(!page) {
-    const res = await query(`SELECT MAX(id) as page FROM chat_history`)
-    page = res[0].page - 5
-    if(page < 0) page = 0
-  } else {
-    if(page > 5) {
-      page -= 5
+  const pageSize = 10
+  let limit = pageSize
+  if(page) {
+    if(page > pageSize) {
+      page -= pageSize
     } else {
       limit = page
       page = 0
     }
+  } else {
+    const res = await query(`SELECT MAX(id) as page FROM chat_history`)
+    page = res[0].page - pageSize
+    if(page < 0) page = 0
   }
   
   let sql = `SELECT name, content FROM chat_history WHERE id > ${ page } LIMIT ${ limit };`
