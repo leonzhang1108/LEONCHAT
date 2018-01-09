@@ -24,6 +24,7 @@ module.exports = {
       style: resolve('src/style'),
       img: resolve('src/img'),
       js: resolve('src/js'),
+      font: resolve('src/font'),
       ...jsFolderAlias
     }
   },
@@ -42,11 +43,17 @@ module.exports = {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
         use: ['css-loader', 'sass-loader']
       })
     }, {
       test: /\.(png|jpg|gif)$/,
       loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]',
+    }, {
+      test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
+      use: [
+        'file-loader'
+      ]
     }]
   }
 }

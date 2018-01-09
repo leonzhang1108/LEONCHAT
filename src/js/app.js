@@ -4,6 +4,7 @@ import routers from 'routers'
 import TabRouter from 'components/TabRouter'
 import { Switch, Route } from 'react-router-dom'
 import 'style/app'
+import 'font/iconfont.css'
 
 const renderRoute = (config, index) => <Route exact key={index} path={`/${config.path}`} component={load(config.title)}/>
 

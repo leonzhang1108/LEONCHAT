@@ -51,7 +51,7 @@ class Login extends React.Component{
     let renderDom = (
       <WingBlank className="w80">
         <InputItem className='login-input' placeholder="your nickname" onChange={this.handleChange} error={error} >
-          <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />
+          <i className="icon iconfont icon-human"></i>
         </InputItem>
         <WhiteSpace size='xl' />
         <Button type="primary" onClick={this.doLogin}>Login</Button>
