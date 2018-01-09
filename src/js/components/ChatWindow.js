@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ChatItem from 'components/ChatItem'
-import PullToRefresh from 'components/ChatPullToRefresh'
+import ChatPullToRefresh from 'components/ChatPullToRefresh'
 import 'style/components/chat-window'
 import { observer, inject } from 'mobx-react'
 import { InputItem, Button } from 'antd'
@@ -41,16 +41,23 @@ class ChatWindow extends React.Component {
     ptr.scrollTop = ptr.scrollHeight
   }
 
+  onRefresh = () => {
+
+  }
+
   render() {
     const { user, store } = this.props
     const { chatHistory } = store
     const { error } = this.state
+    
     return (
       <div className="chat-wrapper">
         <div className="chat-welcome">{`welcome, ${user.name}`}</div>
         <div className="chat-history-wrapper">
-          <PullToRefresh ref={el => this.ptr = el}>
-          <div className="chat-history">
+          <ChatPullToRefresh 
+            ref={el => this.ptr = el}
+            onRefresh={this.onRefresh}
+          >
             {
               chatHistory.map((chatItem, i) => {
                 if(chatItem.user) {
@@ -63,8 +70,7 @@ class ChatWindow extends React.Component {
                 }
               }) 
             }
-          </div>
-          </PullToRefresh>
+          </ChatPullToRefresh>
           <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder="Input" error={error}/>
           <Button onClick={this.doSend} className="chat-button" type="primary" inline size="small" style={{ marginRight: '4px' }}>send</Button>
         </div>

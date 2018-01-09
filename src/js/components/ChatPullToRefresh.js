@@ -1,17 +1,20 @@
 import React from 'react'
 import PullDownLoading from 'components/PullDownLoading'
-import ReactDOM from 'react-dom'
-import { PullToRefresh, Button } from 'antd'
+import { PullToRefresh } from 'antd'
 
 class ChatPullToRefresh extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      refreshing: false
-    }
+  }
+
+  state = {
+    refreshing: false
   }
 
   render() {
+
+    const { children } = this.props
+
     return (
       <PullToRefresh
         style={{
@@ -31,7 +34,7 @@ class ChatPullToRefresh extends React.Component {
           setTimeout(() => this.setState({ refreshing: false }), 1000)
         }}
       >
-        {this.props.children}
+        {children}
       </PullToRefresh>
     )
   }

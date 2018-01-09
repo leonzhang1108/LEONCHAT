@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
-import fetch from 'utils/fetch'
 import { createSocket } from 'socket'
+import { getHistory } from 'api'
 
 class Store {
   // 被观察者
@@ -14,10 +14,6 @@ class Store {
     this.chatHistory = []
   }
 
-  addSocket = socket => {
-    this.socket = socket
-  }
-
   @action doLogin = name => {
     this.user = {
       name,
@@ -26,12 +22,10 @@ class Store {
 
     this.socket = createSocket(name)
 
-    fetch.get('/api/getHistory').then(list => {
-      this.chatHistory = list
-    })
+    this.getHistory()
   }
 
-  
+  @action getHistory = async () => this.chatHistory = await getHistory()
 
   @action clearSocket = () => {
     this.socket.emit('offline', this.user)

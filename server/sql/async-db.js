@@ -1,10 +1,7 @@
 import mysql from 'mysql'
-const pool = mysql.createPool({
-  host: '127.0.0.1',
-  user: 'root',
-  password: '9liang01108',
-  database: 'chat'
-})
+import { mysqlConfig } from '../config'
+
+const pool = mysql.createPool(mysqlConfig)
 
 let query = (sql, values) => new Promise((resolve, reject) => {
   pool.getConnection((err, connection) => {
@@ -12,11 +9,7 @@ let query = (sql, values) => new Promise((resolve, reject) => {
       reject(err)
     } else {
       connection.query(sql, values, (err, rows) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(rows)
-        }
+        err ? reject(err) : resolve(rows)
         connection.release()
       })
     }
