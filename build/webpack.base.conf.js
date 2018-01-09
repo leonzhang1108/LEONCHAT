@@ -18,7 +18,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.json', '.scss', '.png'],
+    extensions: ['.js', '.css', '.json', '.scss', '.png'],
     alias: {
       antd: 'antd-mobile',
       style: resolve('src/style'),
