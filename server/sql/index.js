@@ -17,14 +17,15 @@ const addHistory = async ({ user, content }) => {
   await query(sql, [user.name, content])
 }
 
+// 向上获取5条
 const getHistory = async () => {
-  // 获取最新5条
   let sql = `SELECT name, content FROM chat_history WHERE id > (SELECT MAX(id) FROM chat_history) - 5;`
   return await query(sql)
 }
 
 
 module.exports = {
-  initTable, addHistory,
+  initTable, 
+  addHistory,
   getHistory
 }
