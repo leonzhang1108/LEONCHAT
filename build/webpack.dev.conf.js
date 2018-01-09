@@ -29,6 +29,8 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new FriendlyErrorsPlugin(),
     // 进度条
-    new ProgressBarPlugin()
+    new ProgressBarPlugin(),
+    // 公用提取
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' })
   ]
 })

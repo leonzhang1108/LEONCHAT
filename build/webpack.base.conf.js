@@ -7,7 +7,8 @@ jsFolders.forEach(folder => jsFolderAlias[folder] = resolve(`src/js/${folder}`))
 
 module.exports = {
   entry: {
-    app: './src/js/main.js'
+    app: './src/js/main.js',
+    vendor: ['react', 'react-dom', 'axios', 'mobx', 'mobx-react']
   },
   output: {
     // 打包后文件输出目录  网站根目录
