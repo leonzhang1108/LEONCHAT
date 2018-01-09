@@ -1,7 +1,9 @@
 import fetch from 'utils/fetch'
 
-const getHistory = () => new Promise((resolve, reject) => {
-  fetch.get('/api/getHistory').then(list => {
+const getHistory = page => new Promise((resolve, reject) => {
+  fetch.get('/api/getHistory', {
+    page
+  }).then(list => {
     resolve(list)
   }).catch(reject)
 })

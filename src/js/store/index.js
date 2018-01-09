@@ -7,14 +7,16 @@ class Store {
   @observable user
   @observable socket
   @observable chatHistory = []
+  page
 
   clearLocal = () => {
     this.socket = null
     this.user = null
+    this.page = null
     this.chatHistory = []
   }
 
-  getHistory = async() => await getHistory()
+  getHistory = async page => await getHistory(page)
 
   @action doLogin = async name => {
     this.user = {
@@ -24,12 +26,16 @@ class Store {
 
     this.socket = createSocket(name)
 
-    this.chatHistory = await this.getHistory()
+    const { list, page } = await this.getHistory(this.page)
+    this.chatHistory = list
+    this.page = page
   }
 
   @action pullDownRefreshHistory = async() => {
-    const history = await this.getHistory()
-    this.chatHistory.unshift(...history)
+    if(this.page === 0) return
+    const { list, page } = await this.getHistory(this.page)
+    this.chatHistory.unshift(...list)
+    this.page = page
   }
 
   @action clearSocket = () => {

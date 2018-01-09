@@ -33,8 +33,8 @@ class ChatPullToRefresh extends React.Component {
         refreshing={this.state.refreshing}
         onRefresh={async () => {
           this.setStateAsync({ refreshing: true })
-          const res = await onRefresh()
-          this.setStateAsync({ refreshing: !res })
+          await onRefresh()
+          this.setStateAsync({ refreshing: false })
         }}
       >
         {children}

@@ -52,7 +52,6 @@ class ChatWindow extends React.Component {
   onRefresh = async () => {
     const { pullDownRefreshHistory } = this.props.store
     await pullDownRefreshHistory()
-    return true
   }
 
   render() {

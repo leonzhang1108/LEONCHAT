@@ -11,7 +11,7 @@ const genData = () => {
   return dataArr
 }
 
-const onRefresh = () => new Promise(resolve => setTimeout(() => resolve(true), 1000))
+const onRefresh = () => new Promise(resolve => setTimeout(resolve, 1000))
 
 const Index = ({ className }) => (
   <PullToRefresh className onRefresh={onRefresh}>
