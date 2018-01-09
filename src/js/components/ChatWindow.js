@@ -22,6 +22,8 @@ class ChatWindow extends React.Component {
 
   setStateAsync = state => new Promise(resolve => this.setState(state, resolve))
 
+  componentDidUpdate = () => this.scrollToBottom()
+
   doSend = async () => {
     const { value } = this.state
     const { input } = this.refs
