@@ -15,8 +15,8 @@ class ChatPullToRefresh extends React.Component {
 
   render() {
 
-    const { children, onRefresh } = this.props
-
+    const { children, onRefresh, locale } = this.props
+    const { common } = locale
     return (
       <PullToRefresh
         style={{
@@ -24,10 +24,10 @@ class ChatPullToRefresh extends React.Component {
           overflow: 'auto',
         }}
         indicator={{ 
-          deactivate: 'pull down to update',
-          activate: 'now release',
-          finish: 'finished',
-          release: <PullDownLoading/>
+          deactivate: common.deactivate,
+          activate: common.activate,
+          finish: common.finish,
+          release: <PullDownLoading locale={locale}/>
         }}
         direction="down"
         refreshing={this.state.refreshing}

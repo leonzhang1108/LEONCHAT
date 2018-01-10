@@ -21,11 +21,11 @@ module.exports = {
     extensions: ['.js', '.css', '.json', '.scss', '.png'],
     alias: {
       antd: 'antd-mobile',
-      style: resolve('src/style'),
-      img: resolve('src/img'),
       js: resolve('src/js'),
+      img: resolve('src/img'),
       font: resolve('src/font'),
       i18n: resolve('src/i18n'),
+      style: resolve('src/style'),
       ...jsFolderAlias
     }
   },

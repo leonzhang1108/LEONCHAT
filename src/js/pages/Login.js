@@ -37,9 +37,11 @@ class Login extends React.Component{
   handleChange = name => this.setState({ name, error: !name })
 
   showAlert = () => {
-    alert(this.props.store.name, 'Are you sure???', [
-      { text: 'Cancel', onPress: () => console.log('cancel') },
-      { text: 'Ok', onPress: this.doLogout }
+    const { loginPage, common } = this.props.store.locale
+
+    alert(this.props.store.name, loginPage.logoutCheck, [
+      { text: common.cancel, onPress: () => console.log('cancel') },
+      { text: common.ok, onPress: this.doLogout }
     ])
   }
 
@@ -56,18 +58,19 @@ class Login extends React.Component{
     
     const { store } = this.props
     const { error } = this.state
+    const { loginPage } = store.locale
 
     let renderDom = (
       <WingBlank className="w80">
-        <InputItem ref={el => this.loginInput = el} className='login-input' placeholder="your nickname" onChange={this.handleChange} error={error} >
-          <i className="icon iconfont icon-human"></i>
+        <InputItem ref={el => this.loginInput = el} className='login-input' placeholder={loginPage.nickname} onChange={this.handleChange} error={error} >
+          <i className="icon iconfont icon-human font-base-color"></i>
         </InputItem>
         <WhiteSpace size='xl' />
-        <Button type="primary" onClick={this.doLogin}>Login</Button>
+        <Button type="primary" onClick={this.doLogin}>{loginPage.login}</Button>
       </WingBlank>
     )
 
-    if(store.socket) renderDom = <WingBlank className="w80"><Button type="primary" onClick={this.showAlert}>Logout</Button></WingBlank>
+    if(store.socket) renderDom = <WingBlank className="w80"><Button type="primary" onClick={this.showAlert}>{loginPage.logout}</Button></WingBlank>
 
     return renderDom
   }

@@ -12,10 +12,10 @@ class TabRouter extends React.Component {
 
     const { children, location, history, store } = this.props
     const { pathname } = location
-    const { locale } = store
+    const { bottomTab } = store.locale
     return (
       <TabBar.Item
-        title={locale[config.key]}
+        title={bottomTab[config.key]}
         key={config.path}
         icon={<div className={`${config.title}-icon`} />}
         selectedIcon={<div className={`${config.title}-selected-icon`} />}

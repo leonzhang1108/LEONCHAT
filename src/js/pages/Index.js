@@ -9,9 +9,6 @@ class Index extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      isEnglish: true
-    }
   }
 
   onChange = (e) => {
@@ -21,11 +18,13 @@ class Index extends React.Component {
   }
 
   render() {
+    const { lang } = this.props.store
+    
     return (
       <SegmentedControl
         style={{ width: '80%' }}
         values={['切换到英文', 'Change to Chinese']}
-        selectedIndex={this.state.isEnglish ? 1 : 0}
+        selectedIndex={lang === 'zh' ? 1 : 0}
         onChange={this.onChange}
       />
     )

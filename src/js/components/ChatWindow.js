@@ -62,14 +62,16 @@ class ChatWindow extends React.Component {
     const { store } = this.props
     const { chatHistory, user } = store
     const { error } = this.state
+    const { chat } = store.locale
     
     return (
       <div className="chat-wrapper">
-        <div className="chat-welcome inline-ellipsis">{`welcome, ${user.name}`}</div>
+        <div className="chat-welcome inline-ellipsis">{`${chat.welcome}, ${user.name}`}</div>
         <div className="chat-history-wrapper">
           <ChatPullToRefresh 
             ref={el => this.ptr = el}
             onRefresh={this.onRefresh}
+            locale={this.props.store.locale}
           >
             {
               chatHistory.map((chatItem, i) => {
@@ -84,8 +86,8 @@ class ChatWindow extends React.Component {
               }) 
             }
           </ChatPullToRefresh>
-          <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder="Input" error={error}/>
-          <Button onClick={this.doSend} className="chat-button" type="primary" inline size="small" style={{ marginRight: '4px' }}>send</Button>
+          <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder={chat.chatInputPlaceholder} error={error}/>
+          <Button onClick={this.doSend} className="chat-button" type="primary" inline size="small" style={{ marginRight: '4px' }}>{chat.send}</Button>
         </div>
       </div>
     )

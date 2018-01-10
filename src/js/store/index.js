@@ -6,7 +6,8 @@ class Store {
   // 被观察者
   @observable user
   @observable socket
-  @observable locale = i18n.zh
+  @observable lang = 'zh'
+  @observable locale = i18n[this.lang]
   @observable chatHistory = []
   page
 
@@ -30,7 +31,7 @@ class Store {
     const { list, page } = await this.getHistory(this.page)
 
     // 如果有历史记录 底加个标签
-    list.length && list.push({ msg: 'The above is historical chats. '})
+    list.length && list.push({ msg: this.locale.chat.historyChat})
 
     this.chatHistory = list
     this.page = page
@@ -63,8 +64,8 @@ class Store {
   }
 
   @action changeLocale = index => {
-    const lang = index == 1 ? 'zh' : 'en'
-    this.locale = i18n[lang]
+    this.lang = index == 1 ? 'zh' : 'en'
+    this.locale = i18n[this.lang]
   }
 
 }

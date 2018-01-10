@@ -16,7 +16,8 @@ class Chat extends React.Component {
   toLogin = () => this.props.history.push(`/login`)
   
   render() {
-    let component = <Button className="w80" type="primary" onClick={this.toLogin}>click to login</Button>
+    const { clickToLogin } = this.props.store.locale.chat
+    let component = <Button className="w80" type="primary" onClick={this.toLogin}>{clickToLogin}</Button>
     let user = this.props.store.user
     user && (component = <ChatWindow />)
     return component
