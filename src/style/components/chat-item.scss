@@ -1,3 +1,4 @@
+@import '../base/color';
 $content-frame-color: #fff;
 .chat-item {
   display: flex;
@@ -73,11 +74,16 @@ $content-frame-color: #fff;
 }
 .msg-item-wrapper {
   text-align: center;
-  margin: 10px 0;
-  .msg-item {
+  line-height: 1.8rem;
+  height: 1rem;
+  border-bottom: 1px solid #ddd;
+  margin: 15px;
+  padding: 0 .5rem;
+  .txt {
+    color: #686868;
+    padding: 0 1rem;
+    background: #f5f5f9;
     display: inline-block;
-    padding: 5px 20px;
-    background: #ccc;
-    border-radius: 10px;
+    max-width: 80%;
   }
 }

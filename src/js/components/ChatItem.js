@@ -1,20 +1,25 @@
 import React from 'react'
+import { Modal } from 'antd'
 import 'style/components/chat-item'
 import avatar from 'img/avatar/avatar'
 
+const operation = Modal.operation
+
 const ChatItem = props => {
   const { user, content, msg } = props
+
+  const alert = msg => operation([{text: msg}])
   
   let chatItem = (
-    <div className="msg-item-wrapper">
-      <div className="msg-item">{msg}</div>
+    <div className="msg-item-wrapper" onClick={() => alert(msg)}>
+      <div className="txt inline-ellipsis">{msg}</div>  
     </div>
   )
 
   let contentWrapper = (
     <div className='chat-content-wrapper'>
       <div className='chat-nickname'>{user && user.name}</div>
-      <div className="chat-content">{content}</div>
+      <div className="chat-content" onClick={() => alert(content)}>{content}</div>
     </div>
   )
 

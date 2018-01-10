@@ -61,7 +61,7 @@ class ChatWindow extends React.Component {
     
     return (
       <div className="chat-wrapper">
-        <div className="chat-welcome">{`welcome, ${user.name}`}</div>
+        <div className="chat-welcome inline-ellipsis">{`welcome, ${user.name}`}</div>
         <div className="chat-history-wrapper">
           <ChatPullToRefresh 
             ref={el => this.ptr = el}

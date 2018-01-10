@@ -8,3 +8,18 @@ body {
 .w80 {
   width: 80%;
 }
+
+.inline-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.am-modal.am-modal-operation .am-modal-content .am-modal-button {
+  word-break: break-word;
+  padding: 15px;
+  line-height: 30px;
+  height: auto;
+  white-space: initial;
+  text-align: center!important;
+}

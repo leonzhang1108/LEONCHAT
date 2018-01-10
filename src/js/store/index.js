@@ -27,6 +27,10 @@ class Store {
     this.socket = createSocket(name)
 
     const { list, page } = await this.getHistory(this.page)
+
+    // 如果有历史记录 底加个标签
+    list.length && list.push({ msg: 'The above is historical chats. '})
+
     this.chatHistory = list
     this.page = page
   }
