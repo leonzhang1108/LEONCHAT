@@ -20,10 +20,13 @@ class ChatWindow extends React.Component {
 
   componentDidMount = () => {
     const { socket, addChatHistory } = this.props.store
+    const { input } = this.refs
     socket && socket.on('send', res => {
       addChatHistory(res)
       this.scrollToBottom()
     })
+
+    input.focus()
   }
 
   handleChange = value => this.setState({ value, error: !value })
@@ -42,6 +45,7 @@ class ChatWindow extends React.Component {
       await this.setStateAsync({error: true})
     }
     this.scrollToBottom()
+    input.focus()
   }
 
   scrollToBottom = () => {

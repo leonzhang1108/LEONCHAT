@@ -43,6 +43,15 @@ class Login extends React.Component{
     ])
   }
 
+  inputFocus = () => {
+    const { socket } = this.props.store
+    !socket && this.loginInput.focus()
+  }
+
+  componentDidMount = this.inputFocus
+
+  componentDidUpdate = this.inputFocus
+
   render() {
     
     const { store } = this.props
@@ -50,7 +59,7 @@ class Login extends React.Component{
 
     let renderDom = (
       <WingBlank className="w80">
-        <InputItem className='login-input' placeholder="your nickname" onChange={this.handleChange} error={error} >
+        <InputItem ref={el => this.loginInput = el} className='login-input' placeholder="your nickname" onChange={this.handleChange} error={error} >
           <i className="icon iconfont icon-human"></i>
         </InputItem>
         <WhiteSpace size='xl' />
