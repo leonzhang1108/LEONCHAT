@@ -18,15 +18,17 @@ class Login extends React.Component{
     name: ''
   }
 
-  doLogin = () => {
+  doLogin = async() => {
     const { name } = this.state
     if(name) {
       const { store, history } = this.props
-      store.doLogin(name)
+      await store.doLogin(name)
       history.push(`/chat`)
+      return
+    } else {
+      this.setState({error: true})
     }
-
-    this.setState({error: !name})
+    
   }
 
   doLogout = () => {

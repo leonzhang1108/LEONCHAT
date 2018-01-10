@@ -9,6 +9,7 @@ class Store {
   @observable lang = 'zh'
   @observable locale = i18n[this.lang]
   @observable chatHistory = []
+  @observable unreadMsgCount = 0
   page
 
   clearLocal = () => {
@@ -16,6 +17,7 @@ class Store {
     this.user = null
     this.page = null
     this.chatHistory = []
+    this.unreadMsgCount = 0
   }
 
   getHistory = async page => await getHistory(page)
@@ -66,6 +68,14 @@ class Store {
   @action changeLocale = index => {
     this.lang = index == 1 ? 'zh' : 'en'
     this.locale = i18n[this.lang]
+  }
+
+  @action clearUnread = () => {
+    this.unreadMsgCount = 0
+  }
+
+  @action addUnread = () => {
+    this.unreadMsgCount++
   }
 
 }

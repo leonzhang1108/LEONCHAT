@@ -12,21 +12,31 @@ class ChatWindow extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  
   state = {
     value: '',
     error: false
   }
 
+  sendListener = res => {
+    const { addChatHistory, addUnread } = this.props.store
+
+    addChatHistory(res)
+    this.scrollToBottom()
+    // 如果在其他页面 添加未读数
+    window.location.pathname !== '/chat' && addUnread()
+  }
+
   componentDidMount = () => {
-    const { socket, addChatHistory } = this.props.store
+    const { socket, clearUnread } = this.props.store
     const { input } = this.refs
-    socket && socket.on('send', res => {
-      addChatHistory(res)
-      this.scrollToBottom()
-    })
+
+    // 不重复添加监听
+    socket && !socket._callbacks.$send && socket.on('send', this.sendListener)
 
     input.focus()
+    this.scrollToBottom()
+    clearUnread()
   }
 
   handleChange = value => this.setState({ value, error: !value })
@@ -49,7 +59,8 @@ class ChatWindow extends React.Component {
   }
 
   scrollToBottom = () => {
-    let ptr = ReactDOM.findDOMNode(this.ptr)
+    if(!this.refs.ptr) return
+    let ptr = ReactDOM.findDOMNode(this.refs.ptr)
     ptr.scrollTop = ptr.scrollHeight
   }
 
@@ -69,9 +80,9 @@ class ChatWindow extends React.Component {
         <div className="chat-welcome inline-ellipsis">{`${chat.welcome}, ${user.name}`}</div>
         <div className="chat-history-wrapper">
           <ChatPullToRefresh 
-            ref={el => this.ptr = el}
+            ref="ptr"
             onRefresh={this.onRefresh}
-            locale={this.props.store.locale}
+            store={this.props.store}
           >
             {
               chatHistory.map((chatItem, i) => {

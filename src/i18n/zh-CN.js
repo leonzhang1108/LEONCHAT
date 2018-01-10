@@ -16,7 +16,8 @@ module.exports = {
     deactivate: '继续下拉更新',
     activate: '放开后更新',
     finish: '更新完成',
-    loading: '正在加载...'
+    loading: '正在加载...',
+    nomore: '历史已加载完毕'
   },
   chat: {
     welcome: '欢迎',

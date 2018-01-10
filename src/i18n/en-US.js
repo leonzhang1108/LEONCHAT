@@ -16,7 +16,8 @@ module.exports = {
     deactivate: 'pull down to update',
     activate: 'now release',
     finish: 'finished',
-    loading: 'data is loading...'
+    loading: 'data is loading...',
+    nomore: 'no more history'
   },
   chat: {
     welcome: 'welcome',
