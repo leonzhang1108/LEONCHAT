@@ -1,10 +1,13 @@
 export default [{
   title: 'Index',
-  path: ''
+  path: '',
+  key: 'index'
 }, {
   title: 'Login',
-  path: 'login'
+  path: 'login',
+  key: 'login'
 }, {
   title: 'Chat',
-  path: 'chat'
+  path: 'chat',
+  key: 'chat'
 }]

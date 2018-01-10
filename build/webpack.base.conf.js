@@ -25,6 +25,7 @@ module.exports = {
       img: resolve('src/img'),
       js: resolve('src/js'),
       font: resolve('src/font'),
+      i18n: resolve('src/i18n'),
       ...jsFolderAlias
     }
   },

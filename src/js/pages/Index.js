@@ -1,26 +1,35 @@
-
-import PullToRefresh from 'components/ChatPullToRefresh'
-
+import { SegmentedControl } from 'antd'
 import 'style/pages/index'
+import { observer, inject } from 'mobx-react'
+import Layout from 'components/Layout'
 
-const genData = () => {
-  const dataArr = []
-  for (let i = 0; i < 5; i++) {
-    dataArr.push(i)
+@inject("store")
+@observer
+class Index extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isEnglish: true
+    }
   }
-  return dataArr
+
+  onChange = (e) => {
+    const { changeLocale } = this.props.store
+    const index = e.nativeEvent.selectedSegmentIndex
+    changeLocale(index)
+  }
+
+  render() {
+    return (
+      <SegmentedControl
+        style={{ width: '80%' }}
+        values={['切换到英文', 'Change to Chinese']}
+        selectedIndex={this.state.isEnglish ? 1 : 0}
+        onChange={this.onChange}
+      />
+    )
+  }
 }
 
-const onRefresh = () => new Promise(resolve => setTimeout(resolve, 1000))
-
-const Index = ({ className }) => (
-  <PullToRefresh className onRefresh={onRefresh}>
-    {genData().map(i => (
-      <div key={i} style={{ textAlign: 'center', padding: 20 }}>
-        pull down {i}
-      </div>
-    ))}
-  </PullToRefresh>
-)
-
-export default Index
+export default Layout(Index)

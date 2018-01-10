@@ -38,7 +38,8 @@ module.exports = merge(baseWebpackConfig, {
     // 加了之后公用框架不用import
     new webpack.ProvidePlugin({ 
       FastClick : 'fastclick',
-      React: 'react'
+      React: 'react',
+      i18n: 'i18n'
     })
   ]
 })

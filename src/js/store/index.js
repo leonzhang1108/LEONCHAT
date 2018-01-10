@@ -6,6 +6,7 @@ class Store {
   // 被观察者
   @observable user
   @observable socket
+  @observable locale = i18n.zh
   @observable chatHistory = []
   page
 
@@ -57,9 +58,13 @@ class Store {
       content,
       user: this.user
     }
-    console.log(res)
     this.chatHistory.push(res)
     this.socket.emit('send', res)
+  }
+
+  @action changeLocale = index => {
+    const lang = index == 1 ? 'zh' : 'en'
+    this.locale = i18n[lang]
   }
 
 }
