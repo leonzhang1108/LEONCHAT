@@ -19,7 +19,6 @@ class Index extends React.Component {
 
   render() {
     const { lang } = this.props.store
-    
     return (
       <SegmentedControl
         style={{ width: '80%' }}

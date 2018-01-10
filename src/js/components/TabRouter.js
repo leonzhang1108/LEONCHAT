@@ -22,7 +22,7 @@ class TabRouter extends React.Component {
         selected={pathname === `/${config.path}`}
         onPress={() => { history.push(`/${config.path}`) }}
       >
-        { pathname === `/${config.path}` ? children : null }
+        { children }
       </TabBar.Item>
     )
   }
