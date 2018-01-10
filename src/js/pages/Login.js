@@ -1,4 +1,4 @@
-import React from 'react'
+
 import 'style/pages/login'
 import { InputItem, List, Flex, Button, WingBlank, WhiteSpace, Modal } from 'antd'
 import Layout from 'components/Layout'

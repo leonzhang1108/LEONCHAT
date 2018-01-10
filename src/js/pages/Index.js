@@ -1,4 +1,4 @@
-import React from 'react'
+
 import PullToRefresh from 'components/ChatPullToRefresh'
 
 import 'style/pages/index'

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Flex, Icon } from 'antd'
 import 'style/components/loading'
 

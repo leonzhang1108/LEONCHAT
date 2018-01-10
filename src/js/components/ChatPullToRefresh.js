@@ -1,4 +1,4 @@
-import React from 'react'
+
 import PullDownLoading from 'components/PullDownLoading'
 import { PullToRefresh } from 'antd'
 

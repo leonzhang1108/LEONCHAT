@@ -1,4 +1,4 @@
-import React from 'react'
+
 import 'style/pages/chat'
 import { load } from 'utils/util'
 import ChatWindow from 'components/ChatWindow'

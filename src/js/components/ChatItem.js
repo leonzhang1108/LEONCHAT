@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Modal } from 'antd'
 import 'style/components/chat-item'
 import avatar from 'img/avatar/avatar'

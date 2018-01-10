@@ -27,10 +27,13 @@ $content-frame-color: #fff;
       margin: 0 15px;
       border-radius: 10px;
       min-width: 100px;
-      background: $content-frame-color;
+      background-color: $content-frame-color;
       max-width: 80%;
       position: relative;
       word-break: break-word;
+      &:active {
+        background-color: #ddd;
+      }
     }
   }
 }
@@ -51,7 +54,6 @@ $content-frame-color: #fff;
       border-right-color: $content-frame-color;
     }
   }
-  
 }
 .self {
   justify-content: flex-end;
