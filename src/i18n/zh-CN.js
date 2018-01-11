@@ -25,5 +25,8 @@ module.exports = {
     clickToLogin: '点击进入登录',
     chatInputPlaceholder: '输入',
     send: '发送'
+  },
+  menu: {
+    showMenuBtn: '菜单'
   }
 }

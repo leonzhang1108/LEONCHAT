@@ -1,0 +1,9 @@
+.top-right-btn-wraper {
+  display: flex;
+  align-items: center;
+  .icon-switch-en::before,
+  .icon-switch-zh::before {
+    font-size: 25px;
+    margin-left: 5px;
+  }
+}

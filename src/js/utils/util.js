@@ -1,9 +1,9 @@
 import Loadable from 'react-loadable'
-import Loading from 'components/Loading'
+import PageLoading from 'components/PageLoading'
 
 const load = component => Loadable({
   loader: () => import(`pages/${component}`),
-  loading: Loading
+  loading: PageLoading
 })
 
 module.exports = {

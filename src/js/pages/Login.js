@@ -23,7 +23,7 @@ class Login extends React.Component{
     if(name) {
       const { store, history } = this.props
       await store.doLogin(name)
-      history.push(`/chat`)
+      store.changePageTo('chat', history)
       return
     } else {
       this.setState({error: true})

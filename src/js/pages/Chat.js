@@ -13,7 +13,11 @@ class Chat extends React.Component {
   constructor(props) {
     super(props)
   }
-  toLogin = () => this.props.history.push(`/login`)
+  toLogin = () => {
+    const { history, store } = this.props
+    const { changePageTo }  = store
+    changePageTo('login', history)
+  }
   
   render() {
     const { clickToLogin } = this.props.store.locale.chat

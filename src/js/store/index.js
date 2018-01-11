@@ -10,6 +10,7 @@ class Store {
   @observable locale = i18n[this.lang]
   @observable chatHistory = []
   @observable unreadMsgCount = 0
+  @observable currentPage = 'index'
   page
 
   clearLocal = () => {
@@ -66,7 +67,12 @@ class Store {
   }
 
   @action changeLocale = index => {
-    this.lang = index == 1 ? 'zh' : 'en'
+    this.lang = index === 1 ? 'zh' : 'en'
+    this.locale = i18n[this.lang]
+  }
+
+  @action toogleLocale = index => {
+    this.lang = this.lang === 'zh' ? 'en' : 'zh'
     this.locale = i18n[this.lang]
   }
 
@@ -76,6 +82,15 @@ class Store {
 
   @action addUnread = () => {
     this.unreadMsgCount++
+  }
+
+  @action setCurrentPage = page => {
+    this.currentPage = page
+  }
+
+  @action changePageTo = (page, history) => {
+    history.push(`/${page}`)
+    this.currentPage = page
   }
 
 }

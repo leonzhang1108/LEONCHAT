@@ -25,5 +25,8 @@ module.exports = {
     clickToLogin: 'click to login',
     chatInputPlaceholder: 'Input',
     send: 'send'
+  },
+  menu: {
+    showMenuBtn: 'menu'
   }
 }
