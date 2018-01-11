@@ -1,8 +1,7 @@
 import Router from 'koa-router'
-import sql from '../sql'
 import routes from './routes'
 
-let init = store => {
+const init = store => {
   const router = new Router()
 
   router.get('/getHistory', routes.getHistory)

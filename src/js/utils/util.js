@@ -16,19 +16,18 @@ class Storage {
   }
   
   set = (key, value) => {
-     //存储
-     let mydata = this.storage.getItem(this.ms)
-     if(!mydata){
-         this.init()
-         mydata = this.storage.getItem(this.ms)
-     }
-     mydata = JSON.parse(mydata)
-     mydata.data[key] = value
-     this.storage.setItem(this.ms, JSON.stringify(mydata))
-     return mydata.data
+    let mydata = this.storage.getItem(this.ms)
+    if(!mydata){
+      this.init()
+      mydata = this.storage.getItem(this.ms)
+    }
+    mydata = JSON.parse(mydata)
+    mydata.data[key] = value
+    this.storage.setItem(this.ms, JSON.stringify(mydata))
+    return mydata.data
   }
+
   get = key => {
-    //读取
     let mydata = this.storage.getItem(this.ms)
     if(!mydata) return false
     mydata = JSON.parse(mydata)
@@ -36,7 +35,6 @@ class Storage {
   }
 
   remove = key => {
-    //读取
     let mydata = this.storage.getItem(this.ms)
     if(!mydata) return false
     mydata = JSON.parse(mydata)
