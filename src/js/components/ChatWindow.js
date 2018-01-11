@@ -76,27 +76,27 @@ class ChatWindow extends React.Component {
     const { chat } = store.locale
     
     return (
-      <div className="chat-wrapper">
-        <div className="chat-welcome inline-ellipsis">{`${chat.welcome}, ${user.name}`}</div>
-        <div className="chat-history-wrapper">
-          <ChatPullToRefresh 
-            ref="ptr"
-            onRefresh={this.onRefresh}
-            store={this.props.store}
-          >
-            {
-              chatHistory.map((chatItem, i) => {
-                if(chatItem.user) {
-                  const { id } = chatItem.user
-                  return id === user.id 
-                    ? <ChatItem key={i} {...chatItem} self /> 
-                    : <ChatItem key={i} {...chatItem} friends />
-                } else {
-                  return <ChatItem key={i} {...chatItem} /> 
-                }
-              }) 
-            }
-          </ChatPullToRefresh>
+      <div className="chat-history-wrapper">
+        <ChatPullToRefresh 
+          className="chat-pull-to-refresh"
+          ref="ptr"
+          onRefresh={this.onRefresh}
+          store={this.props.store}
+        >
+          {
+            chatHistory.map((chatItem, i) => {
+              if(chatItem.user) {
+                const { id } = chatItem.user
+                return id === user.id 
+                  ? <ChatItem key={i} {...chatItem} self /> 
+                  : <ChatItem key={i} {...chatItem} friends />
+              } else {
+                return <ChatItem key={i} {...chatItem} /> 
+              }
+            }) 
+          }
+        </ChatPullToRefresh>
+        <div className='chat-input-wraper'>
           <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder={chat.chatInputPlaceholder} error={error}/>
           <Button onClick={this.doSend} className="chat-button" type="primary" inline size="small" style={{ marginRight: '4px' }}>{chat.send}</Button>
         </div>

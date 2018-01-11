@@ -59,13 +59,18 @@ class ChatMenu extends React.Component {
 
   render() {
     const { initData, show } = this.state
-    const { locale, currentPage, lang, unreadMsgCount } = this.props.store
-    const { menu } = locale
+    const { locale, currentPage, lang, unreadMsgCount, socket, user } = this.props.store
+    const { menu, chat } = locale
     const leftContent = <div><i className="icon iconfont icon-menu"></i><span className="icon-menu-text">{menu.showMenuBtn}</span></div>
     const rightContent = <ChatMenuLangSwitch onClick={this.switchLang} lang={lang} unreadMsgCount={unreadMsgCount}/>
+
+    let titleContent = locale.bottomTab[currentPage]
+
+    currentPage === 'chat' 
+    && socket 
+    && (titleContent = <div className="chat-welcome inline-ellipsis">{`${chat.welcome}, ${user.name}`}</div>)
     
     return (
-      
       <div className={show ? 'single-menu-active' : ''}>
         <div>
           <NavBar
@@ -75,7 +80,7 @@ class ChatMenu extends React.Component {
             onLeftClick={this.handleClick}
             className="single-top-nav-bar"
           >
-            {locale.bottomTab[currentPage]}
+            {titleContent}
           </NavBar>
         </div>
         {/* 加载菜单 */}

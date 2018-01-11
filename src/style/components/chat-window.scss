@@ -1,42 +1,25 @@
 @import '../base/color';
-.chat-wrapper {
+.chat-history-wrapper {
   height: 100%;
   width: 100%;
-  .chat-welcome {
-    text-align: center;
-    font-size: 20px;
-    position: absolute;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .chat-pull-to-refresh {
     width: 100%;
-    background: $bg-color;
-    height: 50px;
-    line-height: 50px;
-    z-index: 1;
   }
-  .chat-history-wrapper {
-    padding: 50px 0 44px 0px;
-    height: 100%;
-    position: relative;
+  .chat-input-wraper {
+    display: flex;
+    align-items: center;
     .chat-input {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      input {
-        padding-right: 60px;
-      }
-      .am-input-error-extra {
-        margin-right: 60px;
-      }
+      flex: 1;
     }
     .chat-button {
-      margin-right: 0!important;
-      position: absolute!important;
-      float: right;
+      margin: 0!important;
+      border-radius: 0;
       height: 44px;
       line-height: 44px;
-      font-size: 15px;
-      border-radius: 0;
-      right: 0;
-      bottom: 0;
+      font-size: 16px;
     }
   }
 }

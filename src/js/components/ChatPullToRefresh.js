@@ -15,14 +15,15 @@ class ChatPullToRefresh extends React.Component {
 
   render() {
 
-    const { children, onRefresh, store } = this.props
+    const { children, onRefresh, store, className } = this.props
     const { locale, page } = store
     const { common } = locale
     return (
       <PullToRefresh
+        className={className}
         style={{
           height: '100%',
-          overflow: 'auto',
+          overflow: 'auto'
         }}
         indicator={{ 
           deactivate: page ? common.deactivate : common.nomore,

@@ -6,7 +6,7 @@ class Store {
   // 被观察者
   @observable user
   @observable socket
-  @observable lang = 'zh'
+  @observable lang = 'en'
   @observable locale = i18n[this.lang]
   @observable chatHistory = []
   @observable unreadMsgCount = 0
