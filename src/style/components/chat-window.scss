@@ -10,16 +10,16 @@
   }
   .chat-input-wraper {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     .chat-input {
       flex: 1;
     }
     .chat-button {
-      margin: 0!important;
       border-radius: 0;
-      height: 44px;
-      line-height: 44px;
-      font-size: 16px;
+      height: inherit;
+      line-height: inherit;
+      display: flex;
+      align-items: center;
     }
   }
 }

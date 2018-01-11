@@ -1,5 +1,5 @@
 module.exports = {
-  bottomTab: {
+  menuName: {
     index: '主页',
     login: '登录',
     chat: '聊天'
@@ -17,7 +17,8 @@ module.exports = {
     activate: '放开后更新',
     finish: '更新完成',
     loading: '正在加载...',
-    nomore: '历史已加载完毕'
+    nomore: '历史已加载完毕',
+    noMatch: '页面未找到'
   },
   chat: {
     welcome: '欢迎',

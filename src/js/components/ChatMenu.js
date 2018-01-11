@@ -37,15 +37,13 @@ class ChatMenu extends React.Component {
   handleClick = e => {
     e.preventDefault() 
 
-    const { bottomTab } = this.props.store.locale
-
-    this.setState({ show: !this.state.show })
+    const { menuName } = this.props.store.locale
 
     const initData = routers.map(({value}) => ({
-      value, label: bottomTab[value]
+      value, label: menuName[value]
     }))
 
-    this.setState({ initData })
+    this.setState({ initData, show: !this.state.show })
 
     // mock for async data loading
     // !this.state.initData && setTimeout(() => {
@@ -60,11 +58,11 @@ class ChatMenu extends React.Component {
   render() {
     const { initData, show } = this.state
     const { locale, currentPage, lang, unreadMsgCount, socket, user } = this.props.store
-    const { menu, chat } = locale
+    const { menu, chat, common } = locale
     const leftContent = <div><i className="icon iconfont icon-menu"></i><span className="icon-menu-text">{menu.showMenuBtn}</span></div>
     const rightContent = <ChatMenuLangSwitch onClick={this.switchLang} lang={lang} unreadMsgCount={unreadMsgCount}/>
 
-    let titleContent = locale.bottomTab[currentPage]
+    let titleContent = locale.menuName[currentPage]
 
     currentPage === 'chat' 
     && socket 
@@ -80,7 +78,7 @@ class ChatMenu extends React.Component {
             onLeftClick={this.handleClick}
             className="single-top-nav-bar"
           >
-            {titleContent}
+            {titleContent || common.noMatch}
           </NavBar>
         </div>
         {/* 加载菜单 */}

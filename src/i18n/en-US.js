@@ -1,5 +1,5 @@
 module.exports = {
-  bottomTab: {
+  menuName: {
     index: 'Index',
     login: 'Login',
     chat: 'Chat'
@@ -17,7 +17,8 @@ module.exports = {
     activate: 'now release',
     finish: 'finished',
     loading: 'data is loading...',
-    nomore: 'no more history'
+    nomore: 'no more history',
+    noMatch: 'No Match'
   },
   chat: {
     welcome: 'welcome',

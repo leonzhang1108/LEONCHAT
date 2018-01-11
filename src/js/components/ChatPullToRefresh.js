@@ -18,6 +18,10 @@ class ChatPullToRefresh extends React.Component {
     const { children, onRefresh, store, className } = this.props
     const { locale, page } = store
     const { common } = locale
+    const deactivate = page ? common.deactivate : common.nomore
+    const activate = page ? common.activate : common.nomore
+    const finish = page ? common.finish : common.nomore
+    const release = <PullDownLoading locale={locale}/>
     return (
       <PullToRefresh
         className={className}
@@ -25,12 +29,7 @@ class ChatPullToRefresh extends React.Component {
           height: '100%',
           overflow: 'auto'
         }}
-        indicator={{ 
-          deactivate: page ? common.deactivate : common.nomore,
-          activate: page ? common.activate : common.nomore,
-          finish: page ? common.finish : common.nomore,
-          release: <PullDownLoading locale={locale}/>
-        }}
+        indicator={{ deactivate, activate, finish, release }}
         direction="down"
         refreshing={this.state.refreshing}
         onRefresh={async () => {

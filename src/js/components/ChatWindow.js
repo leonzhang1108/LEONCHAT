@@ -98,7 +98,7 @@ class ChatWindow extends React.Component {
         </ChatPullToRefresh>
         <div className='chat-input-wraper'>
           <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder={chat.chatInputPlaceholder} error={error}/>
-          <Button onClick={this.doSend} className="chat-button" type="primary" inline size="small" style={{ marginRight: '4px' }}>{chat.send}</Button>
+          <Button onClick={this.doSend} className="chat-button" type="primary" inline size="large" >{chat.send}</Button>
         </div>
       </div>
     )

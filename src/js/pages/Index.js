@@ -1,4 +1,4 @@
-import { SegmentedControl } from 'antd'
+import { SegmentedControl, WingBlank, WhiteSpace, DatePicker } from 'antd'
 import 'style/pages/index'
 import { observer, inject } from 'mobx-react'
 import Layout from 'components/Layout'
@@ -21,11 +21,15 @@ class Index extends React.Component {
   render() {
     const { lang } = this.props.store
     return (
-      <SegmentedControl
-        values={['切换到英文', 'Change to Chinese']}
-        selectedIndex={lang === 'zh' ? 1 : 0}
-        onChange={this.onChange}
-      />
+      <WingBlank className="w80">
+        <SegmentedControl
+          values={['切换到英文', 'Change to Chinese']}
+          selectedIndex={lang === 'zh' ? 1 : 0}
+          onChange={this.onChange}
+        />
+        <WhiteSpace size='xl' />
+        <DatePicker/>
+      </WingBlank>
     )
   }
 }
