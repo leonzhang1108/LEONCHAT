@@ -30,7 +30,7 @@ const getHistory = async page => {
       page = 0
     }
   } else {
-    const res = await query(`SELECT MAX(id) as page FROM chat_history`)
+    const res = await query(`SELECT MAX(id) as page FROM chat_history;`)
     page = res[0].page - pageSize
     if(page < 0) page = 0
   }

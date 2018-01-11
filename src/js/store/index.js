@@ -1,12 +1,13 @@
 import { observable, action } from 'mobx'
 import { createSocket } from 'socket'
 import { getHistory } from 'api'
+import { storage } from 'utils/util'
 
 class Store {
   // 被观察者
   @observable user
   @observable socket
-  @observable lang = 'en'
+  @observable lang = storage.get('lang') || 'en'
   @observable locale = i18n[this.lang]
   @observable chatHistory = []
   @observable unreadMsgCount = 0
@@ -53,9 +54,7 @@ class Store {
     this.clearLocal()
   }
 
-  @action addChatHistory = res => {
-    res && this.chatHistory.push(res)
-  }
+  @action addChatHistory = res => res && this.chatHistory.push(res)
 
   @action addChatHistoryAndSend = content => {
     const res = {
@@ -69,24 +68,20 @@ class Store {
   @action changeLocale = index => {
     this.lang = index === 1 ? 'zh' : 'en'
     this.locale = i18n[this.lang]
+    storage.set('lang', this.lang)
   }
 
   @action toogleLocale = index => {
     this.lang = this.lang === 'zh' ? 'en' : 'zh'
     this.locale = i18n[this.lang]
+    storage.set('lang', this.lang)
   }
 
-  @action clearUnread = () => {
-    this.unreadMsgCount = 0
-  }
+  @action clearUnread = () => this.unreadMsgCount = 0
 
-  @action addUnread = () => {
-    this.unreadMsgCount++
-  }
+  @action addUnread = () => this.unreadMsgCount++
 
-  @action setCurrentPage = page => {
-    this.currentPage = page
-  }
+  @action setCurrentPage = page => this.currentPage = page
 
   @action changePageTo = (page, history) => {
     history.push(`/${page}`)
