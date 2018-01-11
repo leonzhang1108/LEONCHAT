@@ -69,6 +69,8 @@ class ChatWindow extends React.Component {
     await pullDownRefreshHistory()
   }
 
+  inputVisible = () => setTimeout(this.scrollToBottom, 500)
+
   render() {
     const { store } = this.props
     const { chatHistory, user } = store
@@ -97,8 +99,23 @@ class ChatWindow extends React.Component {
           }
         </ChatPullToRefresh>
         <div className='chat-input-wraper'>
-          <InputItem ref="input" onChange={this.handleChange} className="chat-input" placeholder={chat.chatInputPlaceholder} error={error}/>
-          <Button onClick={this.doSend} className="chat-button" type="primary" inline size="large" >{chat.send}</Button>
+          <InputItem 
+            ref="input" 
+            onFocus={this.inputVisible}
+            onChange={this.handleChange} 
+            className="chat-input" 
+            placeholder={chat.chatInputPlaceholder} 
+            error={error}
+          />
+          <Button 
+            onClick={this.doSend} 
+            className="chat-button" 
+            type="primary" 
+            inline 
+            size="large" 
+          >
+            {chat.send}
+          </Button>
         </div>
       </div>
     )
