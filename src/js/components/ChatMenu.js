@@ -4,7 +4,7 @@ import ChatMenuEl from './ChatMenuEl'
 import ChatMenuLoading from './ChatMenuLoading'
 import ChatMenuLangSwitch from './ChatMenuLangSwitch'
 import { observer, inject } from 'mobx-react'
-import { withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import 'style/components/chat-menu'
 
 @inject("store")
@@ -57,10 +57,11 @@ class ChatMenu extends React.Component {
 
   render() {
     const { initData, show } = this.state
-    const { locale, currentPage, lang, unreadMsgCount, socket, user } = this.props.store
+    const { history, store } = this.props
+    const { locale, currentPage, lang, socket, user } = store
     const { menu, chat, common } = locale
     const leftContent = <div><i className="icon iconfont icon-menu"></i><span className="icon-menu-text">{menu.showMenuBtn}</span></div>
-    const rightContent = <ChatMenuLangSwitch onClick={this.switchLang} lang={lang} unreadMsgCount={unreadMsgCount}/>
+    const rightContent = <ChatMenuLangSwitch onClick={this.switchLang} lang={lang} history={history} />
 
     let titleContent = locale.menuName[currentPage]
 
