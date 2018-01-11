@@ -5,7 +5,6 @@
 
 > todo
 * 代码分离
-* webpack prod配置
 * 登录
 * 注册
 * 一对一通信
@@ -13,3 +12,5 @@
 * 发送图片
 
 * 分数据库
+* 加ESLINT
+* webpack prod配置
