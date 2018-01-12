@@ -1,0 +1,8 @@
+.app-wraper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .am-segment {
+    flex: 1;
+  }
+}

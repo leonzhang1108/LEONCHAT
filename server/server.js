@@ -37,7 +37,6 @@ const hotMiddleware = whm(compiler, {
 app.use(convert(devMiddleware))
 app.use(convert(hotMiddleware))
 
-
 let router = new Router()
 let store = []
 let apiRouter = api.init(store)
@@ -51,9 +50,8 @@ app
 app.use(historyFallback())
 
 devMiddleware.waitUntilValid(() => {
-  autoOpenBrowser && process.env.NODE_ENV == 'dev' && opn('http://localhost:3000/')
+  autoOpenBrowser && process.env.NODE_ENV === 'dev' && opn('http://localhost:3000/')
 })
-
 
 // 静态
 app.use(kstatic(path.join(__dirname, staticPath)))

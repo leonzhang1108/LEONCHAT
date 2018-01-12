@@ -17,7 +17,7 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       output: {
-        comments: false,  // remove all comments
+        comments: false // remove all comments
       },
       compress: {
         warnings: false
@@ -34,10 +34,11 @@ module.exports = merge(baseWebpackConfig, {
     // 公用JS提取
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
     // 公用样式提取
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin('styles.css'),
     // 加了之后公用框架不用import
-    new webpack.ProvidePlugin({ 
-      FastClick : 'fastclick',
+    new webpack.ProvidePlugin({
+      FastClick: 'fastclick',
+      PropTypes: 'prop-types',
       React: 'react',
       i18n: 'i18n'
     })

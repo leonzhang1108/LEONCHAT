@@ -1,20 +1,18 @@
 /*
- * @Author: Leon Zhang 
- * @Date: 2018-01-02 16:43:15 
+ * @Author: Leon Zhang
+ * @Date: 2018-01-02 16:43:15
  * @Last Modified by: Leon Zhang
- * @Last Modified time: 2018-01-02 16:46:13
+ * @Last Modified time: 2018-01-12 15:06:18
  */
 
- 
 import Axios from 'axios'
-import qs from 'qs'
 import webConfig from 'config/web-config'
 
 const axiosModel = Axios.create({})
 const ajaxMethod = ['get', 'post']
 const api = {}
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   axiosModel.defaults.baseURL = webConfig.web_product_domain
 }
 
@@ -26,7 +24,7 @@ axiosModel.defaults.responseType = 'json'
 
 axiosModel.defaults.transformRequest = [
   function (data) {
-    //数据处理
+    // 数据处理
     // let req = {
     //   data: data
     // }
@@ -34,12 +32,12 @@ axiosModel.defaults.transformRequest = [
   }
 ]
 
-axiosModel.defaults.validateStatus = function (status) {
+axiosModel.defaults.validateStatus = function () {
   return true
 }
 
 axiosModel.interceptors.request.use(function (config) {
-  //配置config
+  // 配置config
   config.headers.Accept = 'application/json, text/plain, */*'
   // config.headers.System = 'vue';
   // let token = Vue.localStorage.get('token');
@@ -61,11 +59,11 @@ axiosModel.interceptors.response.use(function (response) {
 })
 
 ajaxMethod.forEach(method => {
-  //数组取值的两种方式
+  // 数组取值的两种方式
   api[method] = function (uri, data, config) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
       let param = {}
-      if(method == 'get'){
+      if (method === 'get') {
         param.params = data
       } else {
         param = data
@@ -73,7 +71,7 @@ ajaxMethod.forEach(method => {
       axiosModel[method](uri, param, config)
         .then(response => {
           console.log('fetch success')
-          /*根据后台数据进行处理
+          /* 根据后台数据进行处理
            *1 code===200   正常数据+错误数据     code!==200   网络异常等
            *2 code===200   正常数据     code!==200   错误数据+网络异常等
            * 这里使用的是第一种方式
@@ -82,7 +80,7 @@ ajaxMethod.forEach(method => {
           resolve(response)
         })
         .catch(err => {
-          //reject response
+          // reject response
           console.log('fetch fail err:')
           console.log(err)
         })

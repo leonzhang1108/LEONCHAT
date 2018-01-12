@@ -1,9 +1,10 @@
 
 import { ActivityIndicator } from 'antd'
+import 'style/components/chat-menu-loading'
 
-const ChatMenuLoading = props => (
-  <div style={{ position: 'absolute', width: '100%', height: document.documentElement.clientHeight * 0.6, display: 'flex', justifyContent: 'center' }}>
-    <ActivityIndicator size="large" />
+const ChatMenuLoading = () => (
+  <div className='chat-loading-wrapper' style={{ height: document.documentElement.clientHeight * 0.6 }}>
+    <ActivityIndicator size='large' />
   </div>
 )
 

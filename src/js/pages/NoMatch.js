@@ -3,13 +3,10 @@ import Layout from 'components/Layout'
 import 'style/pages/no-match'
 import { observer, inject } from 'mobx-react'
 
-@inject("store")
+@inject('store')
 @observer
 class NoMatch extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
+  render () {
     const { common } = this.props.store.locale
     return <div>{common.noMatch}</div>
   }

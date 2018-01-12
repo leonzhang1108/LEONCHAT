@@ -3,7 +3,7 @@ import { Menu } from 'antd'
 const ChatMenuEl = props => {
   return (
     <Menu
-      className="single-foo-menu"
+      className='single-foo-menu'
       data={props.initData}
       value={[props.currentPage]}
       level={1}

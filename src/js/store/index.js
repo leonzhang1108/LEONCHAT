@@ -22,7 +22,7 @@ class Store {
     this.unreadMsgCount = 0
   }
 
-  getHistory = async page => await getHistory(page)
+  getHistory = async page => getHistory(page)
 
   @action doLogin = async name => {
     this.user = {
@@ -35,14 +35,14 @@ class Store {
     const { list, page } = await this.getHistory(this.page)
 
     // 如果有历史记录 底加个标签
-    list.length && list.push({ msg: this.locale.chat.historyChat})
+    list.length && list.push({ msg: this.locale.chat.historyChat })
 
     this.chatHistory = list
     this.page = page
   }
 
-  @action pullDownRefreshHistory = async() => {
-    if(this.page === 0) return
+  @action pullDownRefreshHistory = async () => {
+    if (this.page === 0) return
     const { list, page } = await this.getHistory(this.page)
     this.chatHistory.unshift(...list)
     this.page = page
@@ -71,7 +71,7 @@ class Store {
     storage.set('lang', this.lang)
   }
 
-  @action toogleLocale = index => {
+  @action toogleLocale = () => {
     this.lang = this.lang === 'zh' ? 'en' : 'zh'
     this.locale = i18n[this.lang]
     storage.set('lang', this.lang)
@@ -87,7 +87,6 @@ class Store {
     history.push(`/${page}`)
     this.currentPage = page
   }
-
 }
 
 export default new Store()

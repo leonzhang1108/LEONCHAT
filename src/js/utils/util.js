@@ -7,17 +7,16 @@ const load = component => Loadable({
 })
 
 class Storage {
-  
   storage = window.localStorage
   ms
 
-  constructor(ms = 'test') {
+  constructor (ms = 'test') {
     this.ms = ms
   }
-  
+
   set = (key, value) => {
     let mydata = this.storage.getItem(this.ms)
-    if(!mydata){
+    if (!mydata) {
       this.init()
       mydata = this.storage.getItem(this.ms)
     }
@@ -29,14 +28,14 @@ class Storage {
 
   get = key => {
     let mydata = this.storage.getItem(this.ms)
-    if(!mydata) return false
+    if (!mydata) return false
     mydata = JSON.parse(mydata)
     return mydata.data[key]
   }
 
   remove = key => {
     let mydata = this.storage.getItem(this.ms)
-    if(!mydata) return false
+    if (!mydata) return false
     mydata = JSON.parse(mydata)
     delete mydata.data[key]
     storage.setItem(ms, JSON.stringify(mydata))
@@ -45,7 +44,7 @@ class Storage {
 
   clear = () => this.storage.removeItem(this.ms)
 
-  init = () => this.storage.setItem(this.ms,'{"data":{}}')
+  init = () => this.storage.setItem(this.ms, '{"data":{}}')
 }
 
 module.exports = {

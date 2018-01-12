@@ -9,7 +9,6 @@ const init = store => {
   return router
 }
 
-
 export default {
   init
 }

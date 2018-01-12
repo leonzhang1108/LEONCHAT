@@ -1,34 +1,28 @@
 
 import 'style/pages/login'
-import { InputItem, List, Flex, Button, WingBlank, WhiteSpace, Modal } from 'antd'
+import { InputItem, Button, WingBlank, WhiteSpace, Modal } from 'antd'
 import Layout from 'components/Layout'
 import { observer, inject } from 'mobx-react'
 
-const alert = Modal.alert 
+const alert = Modal.alert
 
-@inject("store")
+@inject('store')
 @observer
-class Login extends React.Component{
-  constructor(props) {
-    super(props)
-  }
-
+class Login extends React.Component {
   state = {
     error: false,
     name: ''
   }
 
-  doLogin = async() => {
+  doLogin = async () => {
     const { name } = this.state
-    if(name) {
+    if (name) {
       const { store, history } = this.props
       await store.doLogin(name)
       store.changePageTo('chat', history)
-      return
     } else {
       this.setState({error: true})
     }
-    
   }
 
   doLogout = () => {
@@ -56,23 +50,22 @@ class Login extends React.Component{
 
   componentDidUpdate = this.inputFocus
 
-  render() {
-    
+  render () {
     const { store } = this.props
     const { error } = this.state
     const { loginPage } = store.locale
 
     let renderDom = (
-      <WingBlank className="w80">
+      <WingBlank className='w80'>
         <InputItem ref={el => this.loginInput = el} className='login-input' placeholder={loginPage.nickname} onChange={this.handleChange} error={error} >
-          <i className="icon iconfont icon-human font-base-color"></i>
+          <i className='icon iconfont icon-human font-base-color' />
         </InputItem>
         <WhiteSpace size='xl' />
-        <Button type="primary" onClick={this.doLogin}>{loginPage.login}</Button>
+        <Button type='primary' onClick={this.doLogin}>{loginPage.login}</Button>
       </WingBlank>
     )
 
-    if(store.socket) renderDom = <WingBlank className="w80"><Button type="primary" onClick={this.showAlert}>{loginPage.logout}</Button></WingBlank>
+    if (store.socket) renderDom = <WingBlank className='w80'><Button type='primary' onClick={this.showAlert}>{loginPage.logout}</Button></WingBlank>
 
     return renderDom
   }

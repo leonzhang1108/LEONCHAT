@@ -3,25 +3,20 @@ import PullDownLoading from 'components/PullDownLoading'
 import { PullToRefresh } from 'antd'
 
 class ChatPullToRefresh extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   state = {
     refreshing: false
   }
 
   setStateAsync = state => new Promise(resolve => this.setState(state, resolve))
 
-  render() {
-
+  render () {
     const { children, onRefresh, store, className } = this.props
     const { locale, page } = store
     const { common } = locale
     const deactivate = page ? common.deactivate : common.nomore
     const activate = page ? common.activate : common.nomore
     const finish = page ? common.finish : common.nomore
-    const release = <PullDownLoading locale={locale}/>
+    const release = <PullDownLoading locale={locale} />
     return (
       <PullToRefresh
         className={className}
@@ -30,7 +25,7 @@ class ChatPullToRefresh extends React.Component {
           overflow: 'auto'
         }}
         indicator={{ deactivate, activate, finish, release }}
-        direction="down"
+        direction='down'
         refreshing={this.state.refreshing}
         onRefresh={async () => {
           this.setStateAsync({ refreshing: true })

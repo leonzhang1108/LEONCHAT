@@ -49,7 +49,7 @@ module.exports = {
       })
     }, {
       test: /\.(png|jpg|gif)$/,
-      loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]',
+      loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]'
     }, {
       test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
       use: [

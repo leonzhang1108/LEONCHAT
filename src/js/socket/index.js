@@ -1,8 +1,8 @@
 import io from 'socket.io-client'
-import { socket_dev_domain } from 'config/web-config'
+import { socketDevDomain } from 'config/web-config'
 
 const createSocket = name => {
-  const socket = io(socket_dev_domain)
+  const socket = io(socketDevDomain)
 
   socket.on('online', user => {
     console.log(`${user.name} is online`)

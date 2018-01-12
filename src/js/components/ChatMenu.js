@@ -1,4 +1,4 @@
-import { Menu, NavBar } from 'antd'
+import { NavBar } from 'antd'
 import routers from 'routers'
 import ChatMenuEl from './ChatMenuEl'
 import ChatMenuLoading from './ChatMenuLoading'
@@ -7,13 +7,9 @@ import { observer, inject } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 import 'style/components/chat-menu'
 
-@inject("store")
+@inject('store')
 @observer
 class ChatMenu extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   state = {
     initData: '',
     show: false
@@ -28,20 +24,18 @@ class ChatMenu extends React.Component {
 
   onChange = value => {
     const { store, history } = this.props
-    const { setCurrentPage, changePageTo } = store
+    const { changePageTo } = store
     const curr = value[0]
     changePageTo(curr, history)
     this.onMaskClick()
   }
 
   handleClick = e => {
-    e.preventDefault() 
+    e.preventDefault()
 
     const { menuName } = this.props.store.locale
 
-    const initData = routers.map(({value}) => ({
-      value, label: menuName[value]
-    }))
+    const initData = routers.map(({value}) => ({ value, label: menuName[value] }))
 
     this.setState({ initData, show: !this.state.show })
 
@@ -55,36 +49,36 @@ class ChatMenu extends React.Component {
 
   switchLang = () => this.props.store.toogleLocale()
 
-  render() {
+  render () {
     const { initData, show } = this.state
     const { history, store } = this.props
     const { locale, currentPage, lang, socket, user } = store
     const { menu, chat, common } = locale
-    const leftContent = <div><i className="icon iconfont icon-menu"></i><span className="icon-menu-text">{menu.showMenuBtn}</span></div>
-    const rightContent = <ChatMenuLangSwitch onClick={this.switchLang} lang={lang} history={history} />
+    const leftContent = <div><i className='icon iconfont icon-menu' /><span className='icon-menu-text'>{menu.showMenuBtn}</span></div>
+    const rightContent = !show ? <ChatMenuLangSwitch onClick={this.switchLang} lang={lang} history={history} /> : null
 
     let titleContent = locale.menuName[currentPage]
 
-    currentPage === 'chat' 
-    && socket 
-    && (titleContent = <div className="chat-welcome inline-ellipsis">{`${chat.welcome}, ${user.name}`}</div>)
-    
+    currentPage === 'chat' &&
+    socket &&
+    (titleContent = <div className='chat-welcome inline-ellipsis'>{`${chat.welcome}, ${user.name}`}</div>)
+
     return (
       <div className={show ? 'single-menu-active' : ''}>
         <div>
           <NavBar
             leftContent={leftContent}
             rightContent={rightContent}
-            mode="light"
+            mode='light'
             onLeftClick={this.handleClick}
-            className="single-top-nav-bar"
+            className='single-top-nav-bar'
           >
             {titleContent || common.noMatch}
           </NavBar>
         </div>
         {/* 加载菜单 */}
-        {show ? initData ? <ChatMenuEl initData={initData} onChange={this.onChange} currentPage={currentPage}/> : <ChatMenuLoading/> : null}
-        {show ? <div className="menu-mask" onClick={this.onMaskClick} /> : null}
+        {show ? initData ? <ChatMenuEl initData={initData} onChange={this.onChange} currentPage={currentPage} /> : <ChatMenuLoading /> : null}
+        {show ? <div className='menu-mask' onClick={this.onMaskClick} /> : null}
       </div>
     )
   }

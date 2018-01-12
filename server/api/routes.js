@@ -1,6 +1,6 @@
 import sql from '../sql'
 
-const getHistory = async(ctx, next) => {
+const getHistory = async (ctx, next) => {
   // console.log(ctx.cookies.get('name'))
   const { page } = ctx.query
   const res = await sql.getHistory(page)
@@ -14,7 +14,6 @@ const getHistory = async(ctx, next) => {
 
   ctx.body = res
 }
-
 
 module.exports = {
   getHistory

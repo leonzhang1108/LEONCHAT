@@ -14,7 +14,7 @@ const createSocket = (httpServer, store) => {
         msg: `${user.name} is online. `
       })
     })
-    
+
     // 下线
     socket.on('offline', user => {
       log(`${user.name} is offline`, 'gray')

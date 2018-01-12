@@ -14,3 +14,4 @@
 * 分数据库
 * 加ESLINT
 * webpack prod配置
+* 动画
