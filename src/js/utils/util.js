@@ -38,7 +38,7 @@ class Storage {
     if (!mydata) return false
     mydata = JSON.parse(mydata)
     delete mydata.data[key]
-    storage.setItem(ms, JSON.stringify(mydata))
+    this.storage.setItem(this.ms, JSON.stringify(mydata))
     return mydata.data
   }
 
