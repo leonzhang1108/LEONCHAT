@@ -37,7 +37,7 @@ class ChatMenu extends React.Component {
 
     const initData = routers.map(({value}) => ({ value, label: menuName[value] }))
 
-    initData.push({ value: 'the fuck is that', label: 'the fuck is that???' })
+    initData.push({ value: 'whatthefuck', label: 'the fuck is that???' })
 
     this.setState({
       initData, show: !this.state.show })
