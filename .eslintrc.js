@@ -10,8 +10,6 @@ module.exports = {
     'node': true
   },
   rules: {
-    // 全局变量 webpack已配置
-    // 'no-undef': 0,
     // 箭头函数没有返回值
     'no-return-assign': 0,
     // react component引用 no-unused-vars
