@@ -6,6 +6,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
+import webpackBundleAnalyzer from 'webpack-bundle-analyzer' 
+
+const BundleAnalyzerPlugin = webpackBundleAnalyzer.BundleAnalyzerPlugin
 
 module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
@@ -41,6 +44,8 @@ module.exports = merge(baseWebpackConfig, {
       PropTypes: 'prop-types',
       React: 'react',
       i18n: 'i18n'
-    })
+    }),
+    // 分析依赖分布
+    new BundleAnalyzerPlugin()
   ]
 })
