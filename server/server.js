@@ -12,8 +12,8 @@ import { initTable } from './sql'
 import { createSocket } from './socket'
 import wdm from 'koa-webpack-dev-middleware'
 import whm from 'koa-webpack-hot-middleware'
-import webpackConfig from '../build/webpack.dev.conf'
 import historyFallback from 'koa2-history-api-fallback'
+import webpackConfig from '../build/webpack.dev.conf.babel'
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
