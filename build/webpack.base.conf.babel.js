@@ -4,8 +4,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
-const resolve = dir => path.join(__dirname, '..', dir)
 
+const resolve = dir => path.join(__dirname, '..', dir)
 const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components', 'config', 'api']
 const jsFolderAlias = {}
 jsFolders.forEach(folder => jsFolderAlias[folder] = resolve(`src/js/${folder}`))
