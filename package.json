@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-node server/server.js",
-    "eslint": "eslint --fix build/**/*.js ",
+    "eslint-src": "eslint --fix --color src/**/*.js ",
+    "eslint-server": "eslint --fix --color server/**/*.js ",
     "build": "webpack build/webpack.dev.conf.js"
   },
   "keywords": [],
