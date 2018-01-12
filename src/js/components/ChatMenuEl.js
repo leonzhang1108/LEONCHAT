@@ -1,4 +1,5 @@
 import { Menu } from 'antd'
+import 'style/components/chat-menu-el'
 
 const ChatMenuEl = props => {
   return (
@@ -8,7 +9,7 @@ const ChatMenuEl = props => {
       value={[props.currentPage]}
       level={1}
       onChange={props.onChange}
-      height={document.documentElement.clientHeight * 0.6}
+      height={document.documentElement.clientHeight * 0.2}
     />
   )
 }

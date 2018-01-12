@@ -37,7 +37,10 @@ class ChatMenu extends React.Component {
 
     const initData = routers.map(({value}) => ({ value, label: menuName[value] }))
 
-    this.setState({ initData, show: !this.state.show })
+    initData.push({ value: 'the fuck is that', label: 'the fuck is that???' })
+
+    this.setState({
+      initData, show: !this.state.show })
 
     // mock for async data loading
     // !this.state.initData && setTimeout(() => {
