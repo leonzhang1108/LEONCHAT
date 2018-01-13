@@ -41,6 +41,7 @@ module.exports = {
       hash: true
     }),
     new FriendlyErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     // 进度条
     new ProgressBarPlugin(),
     // 公用JS提取

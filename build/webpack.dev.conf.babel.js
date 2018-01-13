@@ -13,7 +13,6 @@ module.exports = merge(baseWebpackConfig, {
       'process.env': config.dev.env
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     // 分析依赖分布
     new BundleAnalyzerPlugin()
   ]

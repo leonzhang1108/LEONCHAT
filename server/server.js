@@ -15,46 +15,47 @@ import whm from 'koa-webpack-hot-middleware'
 import historyFallback from 'koa2-history-api-fallback'
 import webpackConfig from '../build/webpack.dev.conf.babel'
 
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
-}
 
 const port = process.env.PORT || config.dev.port
 const staticPath = '../src'
 const app = new Koa()
 const compiler = webpack(webpackConfig)
 const autoOpenBrowser = !!config.dev.autoOpenBrowser
-
-const devMiddleware = wdm(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true
-})
-
-const hotMiddleware = whm(compiler, {
-  log: () => {}
-})
-
-app.use(convert(devMiddleware))
-app.use(convert(hotMiddleware))
-
-let router = new Router()
+const router = new Router()
+const apiRouter = api.init(store)
 let store = []
-let apiRouter = api.init(store)
 
+
+// api
 router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 
 app
   .use(router.routes())
   .use(router.allowedMethods())
 
+// history fallback
 app.use(historyFallback())
 
-devMiddleware.waitUntilValid(() => {
-  autoOpenBrowser && process.env.NODE_ENV === 'dev' && opn('http://localhost:3000/')
-})
+if(process.env.NODE_ENV === 'dev') {
+  const devMiddleware = wdm(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
+  })
+  
+  const hotMiddleware = whm(compiler, {
+    log: () => {}
+  })
+  
+  devMiddleware.waitUntilValid(() => {
+    autoOpenBrowser && opn('http://localhost:3000/')
+  })
+  
+  app.use(convert(devMiddleware))
+  app.use(convert(hotMiddleware))
+}
 
 // 静态
-app.use(kstatic(path.join(__dirname, staticPath)))
+// app.use(kstatic(path.join(__dirname, staticPath)))
 
 // server
 const httpServer = http.Server(app.callback())
