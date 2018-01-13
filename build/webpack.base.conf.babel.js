@@ -18,7 +18,7 @@ module.exports = {
   output: {
     // 打包后文件输出目录  网站根目录
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].js',
+    filename: '[name].[chunkhash].js',
     publicPath: '/'
   },
   resolve: {
@@ -37,19 +37,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      inject: false
+      favicon: 'src/img/common/favicon.ico',
+      hash: true
     }),
     new FriendlyErrorsPlugin(),
     // 进度条
     new ProgressBarPlugin(),
     // 公用JS提取
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.[hash].js' }),
     // 公用样式提取
     new ExtractTextPlugin('styles.css'),
     // 加了之后公用框架不用import
     new webpack.ProvidePlugin({
       FastClick: 'fastclick',
-      PropTypes: 'prop-types',
       React: 'react',
       i18n: 'i18n'
     })
