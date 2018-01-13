@@ -9,7 +9,7 @@ const ChatMenuEl = props => {
       value={[props.currentPage]}
       level={1}
       onChange={props.onChange}
-      height={document.documentElement.clientHeight * 0.2}
+      height='40px'
     />
   )
 }

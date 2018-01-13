@@ -62,7 +62,7 @@ class ChatWindow extends React.Component {
     await pullDownRefreshHistory()
   }
 
-  inputVisible = () => setTimeout(this.scrollToBottom, 500)
+  inputVisible = () => setTimeout(this.scrollToBottom, 800)
 
   render () {
     const { store } = this.props
