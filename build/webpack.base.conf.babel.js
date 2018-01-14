@@ -45,7 +45,10 @@ module.exports = {
     // 进度条
     new ProgressBarPlugin(),
     // 公用JS提取
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.[hash].js' }),
+    new webpack.optimize.CommonsChunkPlugin({ 
+      name: 'vendor', 
+      filename: 'vendor.[hash].js' 
+    }),
     // 公用样式提取
     new ExtractTextPlugin('styles.css'),
     // 加了之后公用框架不用import

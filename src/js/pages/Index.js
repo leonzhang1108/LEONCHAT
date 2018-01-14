@@ -1,4 +1,4 @@
-import { SegmentedControl, WingBlank, WhiteSpace, DatePicker } from 'antd'
+import { SegmentedControl, WingBlank, WhiteSpace } from 'antd'
 import 'style/pages/index'
 import { observer, inject } from 'mobx-react'
 import Layout from 'components/Layout'
@@ -23,7 +23,6 @@ class Index extends React.Component {
           onChange={this.onChange}
         />
         <WhiteSpace size='xl' />
-        <DatePicker />
       </WingBlank>
     )
   }

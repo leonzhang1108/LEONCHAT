@@ -2,7 +2,10 @@ module.exports = {
   plugins: [
     'react'
   ],
-  extends: ['standard'],
+  extends: [
+    'standard',
+    'standard-react'
+  ],
   parser: 'babel-eslint',
   env: {
     'es6': true,

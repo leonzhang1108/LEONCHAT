@@ -1,0 +1,14 @@
+{
+  "name": "LeonChat",
+  "exec_interpreter": "babel-node",
+  "script": "server/server.js",
+  "watch": true,
+  "error_file": "err.log",
+  "out_file": "out.log",
+  "merge_logs": true,
+  "env": {
+    "COMMON_VARIABLE": "true",
+    "NODE_ENV": "prod",
+    "PORT": 8000
+  }
+}

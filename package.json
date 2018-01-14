@@ -8,7 +8,8 @@
     "eslint-src": "eslint --fix --color src/**/*.js ",
     "eslint-server": "eslint --fix --color server/**/*.js ",
     "build": "rimraf dist && webpack --config build/webpack.prod.conf.babel.js",
-    "server": "cross-env PORT=8000 NODE_ENV=prod babel-node server/server.js"
+    "server": "cross-env PORT=8000 NODE_ENV=prod babel-node server/server.js",
+    "pm2": "pm2 start process.json"
   },
   "keywords": [],
   "author": "",
