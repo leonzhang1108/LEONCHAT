@@ -5,9 +5,6 @@ import baseWebpackConfig from './webpack.base.conf.babel'
 
 module.exports = merge(baseWebpackConfig, {
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': config.dev.env
-    }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false // remove all comments

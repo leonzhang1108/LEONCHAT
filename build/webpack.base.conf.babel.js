@@ -38,6 +38,13 @@ module.exports = {
       filename: 'index.html',
       template: 'src/index.html',
       favicon: 'src/img/common/favicon.ico',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true
+      },
       hash: true
     }),
     new FriendlyErrorsPlugin(),

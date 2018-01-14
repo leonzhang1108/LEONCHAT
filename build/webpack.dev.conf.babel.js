@@ -9,9 +9,6 @@ const BundleAnalyzerPlugin = webpackBundleAnalyzer.BundleAnalyzerPlugin
 module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': config.dev.env
-    }),
     new webpack.HotModuleReplacementPlugin(),
     // 分析依赖分布
     new BundleAnalyzerPlugin()
