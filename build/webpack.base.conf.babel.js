@@ -44,8 +44,7 @@ module.exports = {
         removeRedundantAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true
-      },
-      hash: true
+      }
     }),
     new FriendlyErrorsPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -57,7 +56,7 @@ module.exports = {
       filename: 'vendor.[hash].js' 
     }),
     // 公用样式提取
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('[chunkhash].css'),
     // 加了之后公用框架不用import
     new webpack.ProvidePlugin({
       FastClick: 'fastclick',
@@ -74,14 +73,14 @@ module.exports = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader'
+        use: ['css-loader', 'postcss-loader']
       })
     }, {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader', 'sass-loader']
+        use: ['css-loader', 'sass-loader', 'postcss-loader']
       })
     }, {
       test: /\.(png|jpg|gif)$/,

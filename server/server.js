@@ -14,11 +14,12 @@ const wdm = require('koa-webpack-dev-middleware')
 const whm = require('koa-webpack-hot-middleware')
 const historyFallback = require('koa2-history-api-fallback')
 const webpackConfig = require('../build/webpack.dev.conf.babel')
+const Dashboard = require('webpack-dashboard')
+const DashboardPlugin = require('webpack-dashboard/plugin')
 
 const port = process.env.PORT || config.dev.port
 const staticPath = '../src'
 const app = new Koa()
-const compiler = webpack(webpackConfig)
 const autoOpenBrowser = !!config.dev.autoOpenBrowser
 const router = new Router()
 const apiRouter = api.init(store)
@@ -34,6 +35,11 @@ app.use(router.routes()).use(router.allowedMethods())
 app.use(historyFallback())
 
 if(process.env.NODE_ENV === 'dev') {
+  
+  const compiler = webpack(webpackConfig)
+  const dashboard = new Dashboard()
+  compiler.apply(new DashboardPlugin(dashboard.setData))
+
   const devMiddleware = wdm(compiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true
