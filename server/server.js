@@ -1,12 +1,12 @@
 const Koa = require('koa')
 const opn = require('opn')
 const api = require('./api')
-const path = require('path')
+// const path = require('path')
 const http = require('http')
 const webpack = require('webpack')
 const config = require('../config')
 const Router = require('koa-router')
-const kstatic = require('koa-static')
+// const kstatic = require('koa-static')
 const convert = require('koa-convert')
 const { initTable } = require('./sql')
 const { createSocket } = require('./socket')
@@ -35,7 +35,7 @@ app.use(router.routes()).use(router.allowedMethods())
 app.use(historyFallback())
 
 if(process.env.NODE_ENV === 'dev') {
-  
+
   const compiler = webpack(webpackConfig)
   const dashboard = new Dashboard()
   compiler.apply(new DashboardPlugin(dashboard.setData))
@@ -50,7 +50,7 @@ if(process.env.NODE_ENV === 'dev') {
   })
   
   devMiddleware.waitUntilValid(() => {
-    autoOpenBrowser && opn('http://localhost:3000/')
+    autoOpenBrowser && opn(`http://localhost:${port}/`)
   })
   
   app.use(convert(devMiddleware))
