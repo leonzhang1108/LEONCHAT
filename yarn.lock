@@ -2464,9 +2464,15 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-standard-jsx@4.0.2:
+eslint-config-standard-jsx@4.0.2, eslint-config-standard-jsx@^4.0.0:
   version "4.0.2"
   resolved "http://registry.npm.taobao.org/eslint-config-standard-jsx/download/eslint-config-standard-jsx-4.0.2.tgz#009e53c4ddb1e9ee70b4650ffe63a7f39f8836e1"
+
+eslint-config-standard-react@^5.0.0:
+  version "5.0.0"
+  resolved "http://registry.npm.taobao.org/eslint-config-standard-react/download/eslint-config-standard-react-5.0.0.tgz#64c7b8140172852be810a53d48ee87649ff178e3"
+  dependencies:
+    eslint-config-standard-jsx "^4.0.0"
 
 eslint-config-standard@10.2.1:
   version "10.2.1"
