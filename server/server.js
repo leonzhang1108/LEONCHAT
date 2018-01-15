@@ -18,13 +18,12 @@ const Dashboard = require('webpack-dashboard')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 
 const port = process.env.PORT || config.dev.port
-const staticPath = '../src'
+// const staticPath = '../src'
+let store = []
 const app = new Koa()
 const autoOpenBrowser = !!config.dev.autoOpenBrowser
 const router = new Router()
 const apiRouter = api.init(store)
-let store = []
-
 
 // api
 router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
@@ -34,8 +33,7 @@ app.use(router.routes()).use(router.allowedMethods())
 // history fallback
 app.use(historyFallback())
 
-if(process.env.NODE_ENV === 'dev') {
-
+if (process.env.NODE_ENV === 'dev') {
   const compiler = webpack(webpackConfig)
   const dashboard = new Dashboard()
   compiler.apply(new DashboardPlugin(dashboard.setData))
@@ -44,15 +42,15 @@ if(process.env.NODE_ENV === 'dev') {
     publicPath: webpackConfig.output.publicPath,
     quiet: true
   })
-  
+
   const hotMiddleware = whm(compiler, {
     log: () => {}
   })
-  
+
   devMiddleware.waitUntilValid(() => {
     autoOpenBrowser && opn(`http://localhost:${port}/`)
   })
-  
+
   app.use(convert(devMiddleware))
   app.use(convert(hotMiddleware))
 }
