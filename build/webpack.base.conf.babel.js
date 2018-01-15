@@ -2,7 +2,6 @@ import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
 
 const resolve = dir => path.join(__dirname, '..', dir)
@@ -48,8 +47,6 @@ module.exports = {
     }),
     new FriendlyErrorsPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    // 进度条
-    new ProgressBarPlugin(),
     // 公用JS提取
     new webpack.optimize.CommonsChunkPlugin({ 
       name: 'vendor', 
