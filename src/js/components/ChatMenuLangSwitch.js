@@ -7,4 +7,4 @@ const ChatMenuLangSwitch = props => (
   </div>
 )
 
-export default ChatMenuLangSwitch
+module.exports = ChatMenuLangSwitch

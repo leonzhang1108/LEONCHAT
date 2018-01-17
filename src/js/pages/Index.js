@@ -28,4 +28,4 @@ class Index extends React.Component {
   }
 }
 
-export default Layout(Index)
+module.exports = Layout(Index)

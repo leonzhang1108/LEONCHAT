@@ -87,4 +87,4 @@ class ChatMenu extends React.Component {
   }
 }
 
-export default withRouter(ChatMenu)
+module.exports = withRouter(ChatMenu)

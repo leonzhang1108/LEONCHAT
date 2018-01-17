@@ -70,4 +70,4 @@ ajaxMethod.forEach(method => {
   })
 })
 
-export default api
+module.exports = api

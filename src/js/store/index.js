@@ -89,4 +89,4 @@ class Store {
   }
 }
 
-export default new Store()
+module.exports = new Store()

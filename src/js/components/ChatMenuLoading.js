@@ -8,4 +8,4 @@ const ChatMenuLoading = () => (
   </div>
 )
 
-export default ChatMenuLoading
+module.exports = ChatMenuLoading

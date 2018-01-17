@@ -23,4 +23,4 @@ const App = () => (
   </AppLayout>
 )
 
-export default App
+module.exports = App

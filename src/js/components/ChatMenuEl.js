@@ -14,4 +14,4 @@ const ChatMenuEl = props => {
   )
 }
 
-export default ChatMenuEl
+module.exports = ChatMenuEl

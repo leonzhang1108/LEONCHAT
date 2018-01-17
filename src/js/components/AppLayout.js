@@ -8,4 +8,4 @@ const AppLayout = ({ children }) => (
   </div>
 )
 
-export default AppLayout
+module.exports = AppLayout

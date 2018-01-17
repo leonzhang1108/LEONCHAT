@@ -71,4 +71,4 @@ class Login extends React.Component {
   }
 }
 
-export default Layout(Login)
+module.exports = Layout(Login)

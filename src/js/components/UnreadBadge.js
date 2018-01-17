@@ -19,4 +19,4 @@ class UnreadBadge extends React.Component {
     )
   }
 }
-export default UnreadBadge
+module.exports = UnreadBadge

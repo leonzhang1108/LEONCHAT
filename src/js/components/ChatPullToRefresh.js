@@ -39,4 +39,4 @@ class ChatPullToRefresh extends React.Component {
   }
 }
 
-export default ChatPullToRefresh
+module.exports = ChatPullToRefresh

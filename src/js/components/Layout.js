@@ -6,4 +6,4 @@ const Layout = WrappedComponent => props => (
     <WrappedComponent {...props} />
   </Flex>
 )
-export default Layout
+module.exports = Layout

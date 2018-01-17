@@ -9,4 +9,4 @@ const PullDownLoading = props => (
   </div>
 )
 
-export default PullDownLoading
+module.exports = PullDownLoading

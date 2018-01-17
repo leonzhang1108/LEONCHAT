@@ -18,4 +18,4 @@ class NoMatch extends React.Component {
   }
 }
 
-export default Layout(NoMatch)
+module.exports = Layout(NoMatch)

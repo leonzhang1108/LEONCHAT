@@ -23,4 +23,4 @@ class Chat extends React.Component {
   }
 }
 
-export default Layout(Chat)
+module.exports = Layout(Chat)

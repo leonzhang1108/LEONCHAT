@@ -9,4 +9,4 @@ const Loading = ({ isLoading, error }) => {
   return res ? <Flex className='loading-center'>{res}</Flex> : null
 }
 
-export default Loading
+module.exports = Loading

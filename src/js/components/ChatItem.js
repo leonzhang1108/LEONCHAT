@@ -44,4 +44,4 @@ const ChatItem = props => {
   return chatItem
 }
 
-export default ChatItem
+module.exports = ChatItem
