@@ -6,6 +6,7 @@ const http = require('http')
 const webpack = require('webpack')
 const config = require('../config')
 const Router = require('koa-router')
+const logger = require('koa-logger')
 // const kstatic = require('koa-static')
 const convert = require('koa-convert')
 const { initTable } = require('./sql')
@@ -25,6 +26,8 @@ const autoOpenBrowser = !!config.dev.autoOpenBrowser
 const router = new Router()
 const apiRouter = api.init(store)
 
+app.use(logger())
+
 // api
 router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 
@@ -35,8 +38,8 @@ app.use(historyFallback())
 
 if (process.env.NODE_ENV === 'dev') {
   const compiler = webpack(webpackConfig)
-  const dashboard = new Dashboard()
-  compiler.apply(new DashboardPlugin(dashboard.setData))
+  // const dashboard = new Dashboard()
+  // compiler.apply(new DashboardPlugin(dashboard.setData))
 
   const devMiddleware = wdm(compiler, {
     publicPath: webpackConfig.output.publicPath,
