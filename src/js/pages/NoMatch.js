@@ -1,7 +1,7 @@
 
 import Layout from 'components/Layout'
 import 'style/pages/no-match'
-import { observer, inject } from 'mobx-react'
+const { observer, inject } = MobxReact
 
 @inject('store')
 @observer

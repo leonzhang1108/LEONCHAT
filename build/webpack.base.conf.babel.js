@@ -5,19 +5,21 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
 
 const resolve = dir => path.join(__dirname, '..', dir)
-const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components', 'config', 'api']
+const jsFolders = ['pages', 'utils', 'store', 'socket', 'routers', 'components', 'config', 'api', 'vendor']
 const jsFolderAlias = {}
 jsFolders.forEach(folder => jsFolderAlias[folder] = resolve(`src/js/${folder}`))
 
 module.exports = {
   entry: {
-    app: './src/js/main.js',
-    vendor: ['react', 'react-dom', 'axios', 'mobx', 'mobx-react']
+    app: 'js/main.js',
+    'vendor-socket': 'vendor/vendor-socket.js',
+    'vendor-mobx': 'vendor/vendor-mobx.js',
+    'vendor-axios': 'vendor/vendor-axios.js',
   },
   output: {
     // 打包后文件输出目录  网站根目录
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
     publicPath: '/'
   },
   resolve: {
@@ -49,8 +51,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     // 公用JS提取
     new webpack.optimize.CommonsChunkPlugin({ 
-      name: 'vendor', 
-      filename: 'vendor.[hash].js' 
+      name: ['vendor-socket', 'vendor-mobx', 'vendor-axios']
     }),
     // 公用样式提取
     new ExtractTextPlugin('[chunkhash].css'),
@@ -58,7 +59,11 @@ module.exports = {
     new webpack.ProvidePlugin({
       FastClick: 'fastclick',
       React: 'react',
-      i18n: 'i18n'
+      ReactDOM: 'react-dom',
+      Mobx: 'mobx',
+      MobxReact: 'mobx-react',
+      i18n: 'i18n',
+      io: 'socket.io-client'
     })
   ],
   module: {

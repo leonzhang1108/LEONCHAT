@@ -2,7 +2,7 @@
 import 'style/pages/login'
 import { InputItem, Button, WingBlank, WhiteSpace, Modal } from 'antd'
 import Layout from 'components/Layout'
-import { observer, inject } from 'mobx-react'
+const { observer, inject } = MobxReact
 
 const alert = Modal.alert
 

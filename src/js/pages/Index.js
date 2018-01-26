@@ -1,6 +1,6 @@
 import { SegmentedControl, WingBlank, WhiteSpace } from 'antd'
 import 'style/pages/index'
-import { observer, inject } from 'mobx-react'
+const { observer, inject } = MobxReact
 import Layout from 'components/Layout'
 
 @inject('store')

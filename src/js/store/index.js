@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+const { observable, action } = Mobx
 import { createSocket } from 'socket'
 import { getHistory } from 'api'
 import { storage } from 'utils/util'

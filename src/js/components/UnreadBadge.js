@@ -1,5 +1,5 @@
 import { Badge } from 'antd'
-import { observer, inject } from 'mobx-react'
+const { observer, inject } = MobxReact
 import 'style/components/unread-badge'
 
 @inject('store')

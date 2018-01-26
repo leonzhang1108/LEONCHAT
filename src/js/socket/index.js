@@ -1,4 +1,3 @@
-import io from 'socket.io-client'
 import { socketDevDomain } from 'config/web-config'
 
 const createSocket = name => {
