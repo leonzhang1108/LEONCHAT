@@ -64,7 +64,8 @@ module.exports = {
       MobxReact: 'mobx-react',
       i18n: 'i18n',
       io: 'socket.io-client'
-    })
+    }),
+    new webpack.ProgressPlugin({ profile: false })
   ],
   module: {
     rules: [{
