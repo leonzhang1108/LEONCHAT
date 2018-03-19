@@ -10,4 +10,8 @@ module.exports = [{
   label: 'Chat',
   path: 'chat',
   value: 'chat'
+}, {
+  label: 'InfiniteList',
+  path: 'infiniteList',
+  value: 'infiniteList'
 }]

@@ -1,0 +1,25 @@
+
+.infinite-list-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+  .infinite-list-ghost {
+    position: absolute;
+    right: 0;
+    width: 100px;
+    z-index: -1;
+  }
+  .infinite-list {
+    position: absolute;
+    display: block;
+    overflow: auto;
+    width: 100%;
+    .item {
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+}
+

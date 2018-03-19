@@ -2,7 +2,8 @@ module.exports = {
   menuName: {
     index: 'Index',
     login: 'Login',
-    chat: 'Chat'
+    chat: 'Chat',
+    infiniteList: 'infinite-list'
   },
   loginPage: {
     login: 'Login',

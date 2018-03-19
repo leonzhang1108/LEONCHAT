@@ -2,7 +2,8 @@ module.exports = {
   menuName: {
     index: '主页',
     login: '登录',
-    chat: '聊天'
+    chat: '聊天',
+    infiniteList: '无限列表'
   },
   loginPage: {
     login: '登录',
