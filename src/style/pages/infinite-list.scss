@@ -7,12 +7,10 @@
   .infinite-list-ghost {
     position: absolute;
     right: 0;
-    width: 100px;
+    width: 1px;
     z-index: -1;
   }
   .infinite-list {
-    position: absolute;
-    display: block;
     overflow: auto;
     width: 100%;
     .item {

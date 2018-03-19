@@ -83,7 +83,7 @@ class InfiniteList extends React.Component {
     return (
       <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper"> 
         <div className="infinite-list-ghost" style={{height: contentHeight}}></div>
-        <div className='infinite-list' style={{top}}>
+        <div className='infinite-list' style={{transform: `translate3d(0, ${ top }px, 0)`}}>
           {
             visibleData.map((item, i) => <div className="item" key={i}>{item}</div>)
           }
