@@ -19,7 +19,7 @@ class InfiniteList extends React.Component {
 
     let list = []
 
-    for(let i = 0; i < 100000; i++) {
+    for(let i = 0; i < 1000; i++) {
       list.push(i)
     }
 
@@ -49,7 +49,7 @@ class InfiniteList extends React.Component {
 
     const vh = visibleHeight || this.state.visibleHeight
 
-    const endIndex = startIndex + Math.ceil(vh / itemHeight)
+    const endIndex = startIndex + Math.ceil(vh / itemHeight) + 1
 
     const visibleData = list.slice(startIndex, endIndex)
 
