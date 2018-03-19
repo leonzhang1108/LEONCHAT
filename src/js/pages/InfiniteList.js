@@ -20,9 +20,7 @@ class InfiniteList extends React.Component {
     // item高度
     itemHeight: 30,
     // 可见列表
-    visibleData: [],
-    // 可视化区域扩充
-    offset: 20
+    visibleData: []
   }
 
   componentWillMount() {
@@ -53,34 +51,28 @@ class InfiniteList extends React.Component {
     })
   }
 
-  doCalculate = (s, visibleHeight) => {
+  doCalculate = (startIndex, visibleHeight) => {
 
-    const { itemHeight, list, offset } = this.state
-
-    const startIndex = s
+    const { itemHeight, list } = this.state
 
     const vh = visibleHeight || this.state.visibleHeight
 
-    const e = s + Math.ceil(vh / itemHeight) + offset * 2
+    const endIndex = startIndex + Math.ceil(vh / itemHeight) + 1
 
-    const endIndex = e > list.length ? list.length : e
+    const visibleData = list.slice(startIndex, endIndex)
 
-    const visibleData = list.slice(s, endIndex)
-
-    const top = itemHeight * s
+    const top = itemHeight * startIndex
 
     return { startIndex, endIndex, visibleData, top }
   }
 
   scrollHandler = e => {
 
-    const { itemHeight, offset } = this.state
+    const { itemHeight } = this.state
 
-    const t = Math.floor(e.target.scrollTop / itemHeight)
+    const top = Math.floor(e.target.scrollTop / itemHeight)
 
-    const top = t - offset 
-
-    const data = this.doCalculate(top > 0 ? top : 0)
+    const data = this.doCalculate(top)
 
     this.setState(data)
   }
@@ -89,7 +81,7 @@ class InfiniteList extends React.Component {
     const { visibleData, contentHeight, top } = this.state
 
     return (
-      <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper">
+      <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper"> 
         <div className="infinite-list-ghost" style={{height: contentHeight}}></div>
         <div className='infinite-list' style={{transform: `translate3d(0, ${ top }px, 0)`}}>
           {
@@ -97,6 +89,7 @@ class InfiniteList extends React.Component {
           }
         </div>
       </div>
+      
     )
   }
 }
