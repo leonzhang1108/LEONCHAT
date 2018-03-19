@@ -5,13 +5,21 @@ import 'style/pages/infinite-list'
 class InfiniteList extends React.Component {
 
   state = {
+    // 总列表
     list: [],
+    // 可视区域top
     top: 0,
+    // 数据总高度
     contentHeight: 0,
+    // 可见高度
     visibleHeight: 0,
+    // 可视起始index
     startIndex: 0,
+    // 可视终止index
     endIndex: 0,
+    // item高度
     itemHeight: 30,
+    // 可见列表
     visibleData: []
   }
 
@@ -43,7 +51,7 @@ class InfiniteList extends React.Component {
     })
   }
 
-  doCalculate (startIndex, visibleHeight) {
+  doCalculate = (startIndex, visibleHeight) => {
 
     const { itemHeight, list } = this.state
 
@@ -58,7 +66,7 @@ class InfiniteList extends React.Component {
     return { startIndex, endIndex, visibleData, top }
   }
 
-  scrollHandler(e) {
+  scrollHandler = e => {
 
     const { itemHeight } = this.state
 
@@ -73,7 +81,7 @@ class InfiniteList extends React.Component {
     const { visibleData, contentHeight, top } = this.state
 
     return (
-      <div className='infinite-list-wrapper' onScroll={this.scrollHandler.bind(this)} ref="wrapper"> 
+      <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper"> 
         <div className="infinite-list-ghost" style={{height: contentHeight}}></div>
         <div className='infinite-list' style={{top}}>
           {
