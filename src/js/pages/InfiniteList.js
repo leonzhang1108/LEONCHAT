@@ -22,7 +22,7 @@ class InfiniteList extends React.Component {
     // 可见列表
     visibleData: [],
     // 上下预加载个数
-    offset: 10
+    offset: 20
   }
 
   componentWillMount() {
@@ -36,9 +36,9 @@ class InfiniteList extends React.Component {
 
   componentDidMount() {
 
-    const { list } = this.state
+    const { list, itemHeight } = this.state
 
-    const contentHeight = list.length * 30
+    const contentHeight = list.length * itemHeight
 
     const visibleHeight = this.refs.wrapper.clientHeight
 
