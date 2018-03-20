@@ -21,7 +21,7 @@ class InfiniteList extends React.Component {
     itemHeight: 30,
     // 可见列表
     visibleData: [],
-    // offset
+    // 上下预加载个数
     offset: 10
   }
 
@@ -29,7 +29,7 @@ class InfiniteList extends React.Component {
 
     let list = []
 
-    for(let i = 0; i < 200; i++) list.push(i)
+    for(let i = 0; i < 10000; i++) list.push(i)
 
     this.setState({ list })
   }
@@ -63,7 +63,7 @@ class InfiniteList extends React.Component {
 
     let endIndex = startIndex + Math.ceil(vh / itemHeight) + offset * 2
 
-    endIndex = innerOffset <= 0 ? endIndex + innerOffset : endIndex
+    endIndex = innerOffset < 0 ? endIndex + innerOffset : endIndex
 
     const visibleData = list.slice(startIndex, endIndex)
 
