@@ -20,16 +20,16 @@ class InfiniteList extends React.Component {
     // item高度
     itemHeight: 30,
     // 可见列表
-    visibleData: []
+    visibleData: [],
+    // offset
+    offset: 10
   }
 
   componentWillMount() {
 
     let list = []
 
-    for(let i = 0; i < 1000; i++) {
-      list.push(i)
-    }
+    for(let i = 0; i < 200; i++) list.push(i)
 
     this.setState({ list })
   }
@@ -53,11 +53,17 @@ class InfiniteList extends React.Component {
 
   doCalculate = (startIndex, visibleHeight) => {
 
-    const { itemHeight, list } = this.state
+    const { itemHeight, list, offset } = this.state
 
     const vh = visibleHeight || this.state.visibleHeight
 
-    const endIndex = startIndex + Math.ceil(vh / itemHeight) + 1
+    const innerOffset = startIndex - offset
+
+    startIndex = innerOffset > 0 ? innerOffset : 0
+
+    let endIndex = startIndex + Math.ceil(vh / itemHeight) + offset * 2
+
+    endIndex = innerOffset <= 0 ? endIndex + innerOffset : endIndex
 
     const visibleData = list.slice(startIndex, endIndex)
 
@@ -72,9 +78,8 @@ class InfiniteList extends React.Component {
 
     const top = Math.floor(e.target.scrollTop / itemHeight)
 
-    const data = this.doCalculate(top)
+    top % 2 === 0 && this.setState(this.doCalculate(top))
 
-    this.setState(data)
   }
 
   render () {
@@ -84,12 +89,9 @@ class InfiniteList extends React.Component {
       <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper"> 
         <div className="infinite-list-ghost" style={{height: contentHeight}}></div>
         <div className='infinite-list' style={{transform: `translate3d(0, ${ top }px, 0)`}}>
-          {
-            visibleData.map((item, i) => <div className="item" key={i}>{item}</div>)
-          }
+          { visibleData.map((item, i) => <div className="item" key={i}>{`item-${item}`}</div>) }
         </div>
       </div>
-      
     )
   }
 }
