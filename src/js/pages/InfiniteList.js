@@ -33,7 +33,7 @@ class InfiniteList extends React.Component {
 
     const { itemHeight } = this.state
 
-    for(let i = 0; i < 100000; i++) {
+    for(let i = 0; i < 1000; i++) {
       list.push({
         val: i,
         height: this.randomBoolean() ? 60 : 30
@@ -131,10 +131,48 @@ class InfiniteList extends React.Component {
 
   findStartIndex = top => {
 
+    let { startIndexCache } = this.state
+
+    if (startIndexCache[top]) return startIndexCache[top]
+
+    let left = top
+    let right = top
+
+    while (left > 0) {
+      if (startIndexCache[--left]) break
+    }
+
+    while (right < startIndexCache.length) {
+      if (startIndexCache[++right]) break
+    }
+    
+    // 如果前后都有缓存 且值差==1 则index为小的那个
+    if (left !== 0 && right !== startIndexCache.length) {
+      const dValue = startIndexCache[right] - startIndexCache[left]
+      
+      if (dValue === 1) {
+
+        const startIndex = startIndexCache[left]
+        startIndexCache[top] = startIndex
+
+        this.setState({
+          startIndexCache
+        })
+
+        return startIndex
+      } 
+
+    }
+
     // 计算startIndex
     const startIndex = this.findIndexByTop(top)
 
-    // todo cache
+    // 加入缓存
+    startIndexCache[top] = startIndex
+
+    this.setState({
+      startIndexCache
+    })
 
     return startIndex
   }
