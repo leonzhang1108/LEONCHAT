@@ -33,7 +33,7 @@ class InfiniteList extends React.Component {
 
     const { itemHeight } = this.state
 
-    for(let i = 0; i < 100; i++) {
+    for(let i = 0; i < 100000; i++) {
       list.push({
         val: i,
         height: this.randomBoolean() ? 60 : 30
@@ -51,7 +51,7 @@ class InfiniteList extends React.Component {
 
     const visibleHeight = this.refs.wrapper.clientHeight
 
-    const data = this.doCalculate(0, visibleHeight)
+    const data = this.doCalculate(0)
 
     this.setState({ 
       visibleHeight,
@@ -59,13 +59,15 @@ class InfiniteList extends React.Component {
     })
   }
 
-  doCalculate = (startIndex, visibleHeight) => {
+  doCalculate = startIndex => {
 
     const { list, offset } = this.state
 
-    const vh = visibleHeight || this.state.visibleHeight
+    const innerOffset = startIndex - offset
 
-    let endIndex = this.findEndIndex(startIndex) + 1
+    startIndex = innerOffset > 0 ? innerOffset : 0
+
+    let endIndex = this.findEndIndex(startIndex) + offset * 2
 
     const visibleData = list.slice(startIndex, endIndex)
 
@@ -131,8 +133,6 @@ class InfiniteList extends React.Component {
 
     // 计算startIndex
     const startIndex = this.findIndexByTop(top)
-
-    console.log(top, startIndex)
 
     // todo cache
 
