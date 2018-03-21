@@ -13,39 +13,47 @@ class InfiniteList extends React.Component {
     contentHeight: 0,
     // 可见高度
     visibleHeight: 0,
-    // 可视起始index
-    startIndex: 0,
-    // 可视终止index
-    endIndex: 0,
     // item高度
     itemHeight: 30,
     // 可见列表
     visibleData: [],
     // 上下预加载个数
-    offset: 20
+    offset: 10,
+    // 间隔
+    interval: 2,
+    // 缓存
+    indexFindTop: [],
+    startIndexCache: [],
+    endIndexCache: []
   }
 
   componentWillMount() {
 
     let list = []
 
-    for(let i = 0; i < 10000; i++) list.push(i)
+    const { itemHeight } = this.state
 
-    this.setState({ list })
+    for(let i = 0; i < 100; i++) {
+      list.push({
+        val: i,
+        height: this.randomBoolean() ? 60 : 30
+      })
+    }
+
+    const contentHeight = list.reduce((p, c) => p + c.height, 0)
+
+    this.setState({ list, contentHeight })
   }
 
+  randomBoolean = () => Math.random() - 0.5 > 0
+
   componentDidMount() {
-
-    const { list, itemHeight } = this.state
-
-    const contentHeight = list.length * itemHeight
 
     const visibleHeight = this.refs.wrapper.clientHeight
 
     const data = this.doCalculate(0, visibleHeight)
 
-    this.setState({
-      contentHeight,
+    this.setState({ 
       visibleHeight,
       ...data
     })
@@ -53,32 +61,112 @@ class InfiniteList extends React.Component {
 
   doCalculate = (startIndex, visibleHeight) => {
 
-    const { itemHeight, list, offset } = this.state
+    const { list, offset } = this.state
 
     const vh = visibleHeight || this.state.visibleHeight
 
-    const innerOffset = startIndex - offset
-
-    startIndex = innerOffset > 0 ? innerOffset : 0
-
-    let endIndex = startIndex + Math.ceil(vh / itemHeight) + offset * 2
-
-    endIndex = innerOffset < 0 ? endIndex + innerOffset : endIndex
+    let endIndex = this.findEndIndex(startIndex) + 1
 
     const visibleData = list.slice(startIndex, endIndex)
 
-    const top = itemHeight * startIndex
+    const top = this.findTopByIndex(startIndex)
+    
+    return { visibleData, top }
+  }
 
-    return { startIndex, endIndex, visibleData, top }
+  findTopByIndex = index => {
+
+    if(!index) return 0
+
+    const { list, indexFindTop, interval } = this.state
+
+    // 取缓存
+    if (indexFindTop[index])
+      return indexFindTop[index]
+
+    let top = 0
+    let start = 0
+
+    if (index - interval >= 0) {
+      const cache = indexFindTop[index - interval]
+      start = index - interval
+      
+      if (cache) {
+        // 缓存中拿
+        top = cache
+      } else {
+        // 遍历取值
+        for(let i = 0; i < start; i++) 
+          top += list[i].height
+      }
+    }
+    
+    for(let i = start; i < index; i++) 
+      top += list[i].height
+
+    indexFindTop[index] = top
+
+    this.setState({ indexFindTop })
+
+    return top
+  }
+
+  findIndexByTop = (top, index = 0) => {
+
+    const { list } = this.state
+
+    while (top > 0) {
+      let i = index + 1
+      if (i !== list.length) {
+        top -= list[++index].height
+      } else {
+        break
+      }
+    }
+
+    return index
+  }
+
+  findStartIndex = top => {
+
+    // 计算startIndex
+    const startIndex = this.findIndexByTop(top)
+
+    console.log(top, startIndex)
+
+    // todo cache
+
+    return startIndex
+  }
+
+  findEndIndex = startIndex => {
+    let { visibleHeight, endIndexCache } = this.state
+
+    if (endIndexCache[startIndex]) 
+      return endIndexCache[startIndex]
+
+    visibleHeight = visibleHeight || this.refs.wrapper.clientHeight
+
+    // 计算endIndex
+    const endIndex = this.findIndexByTop(visibleHeight, startIndex)
+
+    // 加入缓存
+    endIndexCache[startIndex] = endIndex
+
+    this.setState({
+      endIndexCache
+    })
+
+    return endIndex
   }
 
   scrollHandler = e => {
 
-    const { itemHeight } = this.state
+    const { interval } = this.state
 
-    const top = Math.floor(e.target.scrollTop / itemHeight)
+    const startIndex = this.findStartIndex(e.target.scrollTop)
 
-    top % 2 === 0 && this.setState(this.doCalculate(top))
+    startIndex % interval === 0 && this.setState(this.doCalculate(startIndex))
 
   }
 
@@ -89,7 +177,10 @@ class InfiniteList extends React.Component {
       <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper"> 
         <div className="infinite-list-ghost" style={{height: contentHeight}}></div>
         <div className='infinite-list' style={{transform: `translate3d(0, ${ top }px, 0)`}}>
-          { visibleData.map((item, i) => <div className="item" key={i}>{`item-${item}`}</div>) }
+          { visibleData.map((item, i) => {
+            const style = {height: `${item.height}px`, lineHeight: `${item.height}px`}
+            return <div className="item" key={i} style={style}>{`item-${item.val}`}</div>
+          }) }
         </div>
       </div>
     )
