@@ -22,14 +22,14 @@ class InfiniteList extends React.Component {
     // 可见列表
     visibleData: [],
     // 上下预加载个数
-    offset: 20
+    offset: -5
   }
 
   componentWillMount() {
 
     let list = []
 
-    for(let i = 0; i < 10000; i++) list.push(i)
+    for(let i = 0; i < 1000; i++) list.push(i)
 
     this.setState({ list })
   }
