@@ -1,4 +1,3 @@
-
 import Layout from 'components/Layout'
 import 'style/pages/infinite-list'
 
@@ -28,12 +27,14 @@ class InfiniteList extends React.Component {
 
   componentWillMount() {
 
+    // init data
     let list = []
 
     const { itemHeight } = this.state
 
-    for(let i = 0; i < 1000; i++) {
+    for(let i = 0; i < 200; i++) {
 
+      // randam height
       const height = this.randomBoolean() ? 60 : 30
 
       list.push({
@@ -52,13 +53,12 @@ class InfiniteList extends React.Component {
 
   componentDidMount() {
 
+    // init height & visible data
     const visibleHeight = this.refs.wrapper.clientHeight
-
-    const data = this.doCalculate(0)
 
     this.setState({ 
       visibleHeight,
-      ...data
+      ...this.doCalculate(0)
     })
   }
 
@@ -98,11 +98,15 @@ class InfiniteList extends React.Component {
 
     endIndex = innerOffset < 0 ? endIndex + innerOffset : endIndex
 
+    const maxLength = list.length
+
+    endIndex = endIndex >= maxLength ? maxLength : endIndex
+    
+    this.calculateOffset(endIndex - 1)
+
     const visibleData = list.slice(startIndex, endIndex)
 
     const top = this.findTopByIndex(startIndex)
-
-    this.calculateOffset(endIndex)
     
     return { visibleData, top }
   }
