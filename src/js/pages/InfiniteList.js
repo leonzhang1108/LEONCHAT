@@ -5,7 +5,7 @@ import 'style/pages/infinite-list'
 class InfiniteList extends React.Component {
 
   state = {
-    // 总列表
+    // 总列表，及offsetTop
     list: [],
     // 可视区域top
     top: 0,
@@ -23,7 +23,6 @@ class InfiniteList extends React.Component {
     interval: 2,
     // 缓存
     indexFindTop: [],
-    startIndexCache: [],
     endIndexCache: []
   }
 
@@ -34,9 +33,13 @@ class InfiniteList extends React.Component {
     const { itemHeight } = this.state
 
     for(let i = 0; i < 1000; i++) {
+
+      const height = this.randomBoolean() ? 60 : 30
+
       list.push({
         val: i,
-        height: this.randomBoolean() ? 60 : 30
+        height,
+        offsetTop: i ? undefined : height
       })
     }
 
@@ -59,6 +62,30 @@ class InfiniteList extends React.Component {
     })
   }
 
+  calculateOffset = index => {
+
+    let { list } = this.state
+
+    // 取缓存
+    if (list[index].offsetTop) return list[index].offsetTop
+    
+    let offsetTop = list[index].height
+
+    if(index !== 1) {
+      offsetTop += this.calculateOffset(index - 1)
+    }
+
+    // 添加缓存
+    list[index] = {
+      ...list[index],
+      offsetTop
+    }
+
+    this.setState({ list })
+
+    return offsetTop
+  }
+
   doCalculate = startIndex => {
 
     const { list, offset } = this.state
@@ -69,9 +96,13 @@ class InfiniteList extends React.Component {
 
     let endIndex = this.findEndIndex(startIndex) + offset * 2
 
+    endIndex = innerOffset < 0 ? endIndex + innerOffset : endIndex
+
     const visibleData = list.slice(startIndex, endIndex)
 
     const top = this.findTopByIndex(startIndex)
+
+    this.calculateOffset(endIndex)
     
     return { visibleData, top }
   }
@@ -94,7 +125,7 @@ class InfiniteList extends React.Component {
       start = index - interval
       
       if (cache) {
-        // 缓存中拿
+        // 取缓存
         top = cache
       } else {
         // 遍历取值
@@ -130,51 +161,19 @@ class InfiniteList extends React.Component {
   }
 
   findStartIndex = top => {
+    const { list } = this.state
 
-    let { startIndexCache } = this.state
+    let index = 0
 
-    if (startIndexCache[top]) return startIndexCache[top]
-
-    let left = top
-    let right = top
-
-    while (left > 0) {
-      if (startIndexCache[--left]) break
+    while(index < list.length) {
+      if (top >= list[index].offsetTop) {
+        index++
+      } else {
+        break
+      }
     }
 
-    while (right < startIndexCache.length) {
-      if (startIndexCache[++right]) break
-    }
-    
-    // 如果前后都有缓存 且值差==1 则index为小的那个
-    if (left !== 0 && right !== startIndexCache.length) {
-      const dValue = startIndexCache[right] - startIndexCache[left]
-      
-      if (dValue === 1) {
-
-        const startIndex = startIndexCache[left]
-        startIndexCache[top] = startIndex
-
-        this.setState({
-          startIndexCache
-        })
-
-        return startIndex
-      } 
-
-    }
-
-    // 计算startIndex
-    const startIndex = this.findIndexByTop(top)
-
-    // 加入缓存
-    startIndexCache[top] = startIndex
-
-    this.setState({
-      startIndexCache
-    })
-
-    return startIndex
+    return index
   }
 
   findEndIndex = startIndex => {
