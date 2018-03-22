@@ -21,7 +21,6 @@ class InfiniteList extends React.Component {
     // 间隔
     interval: 2,
     // 缓存
-    indexFindTop: [],
     endIndexCache: []
   }
 
@@ -98,9 +97,7 @@ class InfiniteList extends React.Component {
 
     endIndex = innerOffset < 0 ? endIndex + innerOffset : endIndex
 
-    const maxLength = list.length
-
-    endIndex = endIndex >= maxLength ? maxLength : endIndex
+    endIndex = endIndex >= list.length ? list.length : endIndex
     
     this.calculateOffset(endIndex - 1)
 
@@ -111,42 +108,7 @@ class InfiniteList extends React.Component {
     return { visibleData, top }
   }
 
-  findTopByIndex = index => {
-
-    if(!index) return 0
-
-    const { list, indexFindTop, interval } = this.state
-
-    // 取缓存
-    if (indexFindTop[index])
-      return indexFindTop[index]
-
-    let top = 0
-    let start = 0
-
-    if (index - interval >= 0) {
-      const cache = indexFindTop[index - interval]
-      start = index - interval
-      
-      if (cache) {
-        // 取缓存
-        top = cache
-      } else {
-        // 遍历取值
-        for(let i = 0; i < start; i++) 
-          top += list[i].height
-      }
-    }
-    
-    for(let i = start; i < index; i++) 
-      top += list[i].height
-
-    indexFindTop[index] = top
-
-    this.setState({ indexFindTop })
-
-    return top
-  }
+  findTopByIndex = index => index ? this.state.list[index].offsetTop : 0
 
   findIndexByTop = (top, index = 0) => {
 
