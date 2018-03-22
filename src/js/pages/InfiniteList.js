@@ -108,7 +108,7 @@ class InfiniteList extends React.Component {
     return { visibleData, top }
   }
 
-  findTopByIndex = index => index ? this.state.list[index].offsetTop : 0
+  findTopByIndex = index => index ? this.state.list[index - 1].offsetTop : 0
 
   findIndexByTop = (top, index = 0) => {
 
