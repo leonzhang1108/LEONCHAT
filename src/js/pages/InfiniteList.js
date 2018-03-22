@@ -17,7 +17,7 @@ class InfiniteList extends React.Component {
     // 可见列表
     visibleData: [],
     // 上下预加载个数
-    offset: 10,
+    offset: 0,
     // 间隔
     interval: 2,
     // 缓存
