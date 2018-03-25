@@ -34,8 +34,7 @@ class InfiniteList extends React.Component {
 
     const { itemHeight } = this.state
 
-    for (let i = 0; i < 200; i++) {
-
+    for (let i = 0; i < 12300; i++) {
       // randam height
       const height = this.randomBoolean() ? 80 : 30
 
@@ -52,7 +51,6 @@ class InfiniteList extends React.Component {
   }
 
   componentDidMount() {
-
     // init height & visible data
     const visibleHeight = this.refs.wrapper.clientHeight
 
@@ -63,8 +61,9 @@ class InfiniteList extends React.Component {
   }
 
   calculateOffset = index => {
-
     let { list } = this.state
+
+    if (index === list.length) return
 
     // 取缓存
     if (list[index].offsetTop) return list[index].offsetTop
@@ -88,17 +87,15 @@ class InfiniteList extends React.Component {
 
     const { list, offset } = this.state
 
-    const innerOffset = startIndex - offset
+    const innerOffset = startIndex = startIndex - offset
 
-    startIndex = innerOffset > 0 ? innerOffset : 0
+    startIndex = startIndex > 0 ? startIndex : 0
 
-    let endIndex = this.findEndIndex(startIndex) + offset * 2
+    let endIndex = this.findEndIndex(startIndex) + offset * 2 + 1
 
     endIndex = innerOffset < 0 ? endIndex + innerOffset : endIndex
 
-    endIndex = endIndex >= list.length ? list.length : endIndex
-    
-    this.calculateOffset(endIndex)
+    endIndex = endIndex > list.length ? list.length : endIndex
 
     const visibleData = list.slice(startIndex, endIndex)
 
@@ -156,9 +153,7 @@ class InfiniteList extends React.Component {
     // 加入缓存
     endIndexCache[startIndex] = endIndex
 
-    this.setState({
-      endIndexCache
-    })
+    this.setState({ endIndexCache })
 
     return endIndex
   }
