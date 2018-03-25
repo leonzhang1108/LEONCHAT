@@ -1,5 +1,6 @@
 import Layout from 'components/Layout'
 import 'style/pages/infinite-list'
+import { SIGBREAK } from 'constants';
 
 class InfiniteList extends React.Component {
 
@@ -24,6 +25,8 @@ class InfiniteList extends React.Component {
     endIndexCache: []
   }
 
+  randomBoolean = () => Math.random() - 0.5 > 0
+
   componentWillMount() {
 
     // init data
@@ -31,10 +34,10 @@ class InfiniteList extends React.Component {
 
     const { itemHeight } = this.state
 
-    for(let i = 0; i < 200; i++) {
+    for (let i = 0; i < 200; i++) {
 
       // randam height
-      const height = this.randomBoolean() ? 60 : 30
+      const height = this.randomBoolean() ? 80 : 30
 
       list.push({
         val: i,
@@ -47,8 +50,6 @@ class InfiniteList extends React.Component {
 
     this.setState({ list, contentHeight })
   }
-
-  randomBoolean = () => Math.random() - 0.5 > 0
 
   componentDidMount() {
 
@@ -70,9 +71,7 @@ class InfiniteList extends React.Component {
     
     let offsetTop = list[index].height
 
-    if(index !== 1) {
-      offsetTop += this.calculateOffset(index - 1)
-    }
+    offsetTop += this.calculateOffset(index - 1)
 
     // 添加缓存
     list[index] = {
@@ -99,7 +98,7 @@ class InfiniteList extends React.Component {
 
     endIndex = endIndex >= list.length ? list.length : endIndex
     
-    this.calculateOffset(endIndex - 1)
+    this.calculateOffset(endIndex)
 
     const visibleData = list.slice(startIndex, endIndex)
 
@@ -132,11 +131,11 @@ class InfiniteList extends React.Component {
     let index = 0
 
     while(index < list.length) {
-      if (top >= list[index].offsetTop) {
-        index++
-      } else {
-        break
-      }
+      !list[index].offsetTop && this.calculateOffset(index)
+
+      if (top < list[index].offsetTop) break
+
+      index++
     }
 
     return index
@@ -145,6 +144,7 @@ class InfiniteList extends React.Component {
   findEndIndex = startIndex => {
     let { visibleHeight, endIndexCache } = this.state
 
+    // 取缓存
     if (endIndexCache[startIndex]) 
       return endIndexCache[startIndex]
 
@@ -164,7 +164,6 @@ class InfiniteList extends React.Component {
   }
 
   scrollHandler = e => {
-
     const { interval } = this.state
 
     const startIndex = this.findStartIndex(e.target.scrollTop)
