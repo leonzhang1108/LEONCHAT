@@ -1,6 +1,5 @@
 import Layout from 'components/Layout'
 import 'style/pages/infinite-list'
-import { SIGBREAK } from 'constants';
 
 class InfiniteList extends React.Component {
 
@@ -18,7 +17,7 @@ class InfiniteList extends React.Component {
     // 可见列表
     visibleData: [],
     // 上下预加载个数
-    offset: 0,
+    offset: 10,
     // 间隔
     interval: 2,
     // 缓存
@@ -34,14 +33,13 @@ class InfiniteList extends React.Component {
 
     const { itemHeight } = this.state
 
-    for (let i = 0; i < 12300; i++) {
+    for (let val = 0; val < 123; val++) {
       // randam height
-      const height = this.randomBoolean() ? 80 : 30
+      const height = this.randomBoolean() ? 60 : 30
 
       list.push({
-        val: i,
-        height,
-        offsetTop: i ? undefined : height
+        val, height,
+        offsetTop: val ? undefined : height
       })
     }
 
