@@ -18,9 +18,7 @@ class InfiniteList extends React.Component {
     // 上下预加载个数
     offset: 10,
     // 间隔
-    interval: 2,
-    // 缓存
-    endIndexCache: []
+    interval: 2
   }
 
   randomBoolean = () => Math.random() - 0.5 > 0
@@ -31,7 +29,7 @@ class InfiniteList extends React.Component {
 
     const { itemHeight } = this.state
 
-    for (let val = 0; val < 123; val++) {
+    for (let val = 0; val < 1230; val++) {
       // randam height
       const height = this.randomBoolean() ? 60 : 30
 
@@ -134,10 +132,10 @@ class InfiniteList extends React.Component {
   }
 
   findEndIndex = startIndex => {
-    let { visibleHeight, endIndexCache } = this.state
+    let { visibleHeight, list } = this.state
 
     // 取缓存
-    if (endIndexCache[startIndex]) { return endIndexCache[startIndex] }
+    if (list[startIndex].endIndex) { return list[startIndex].endIndex }
 
     visibleHeight = visibleHeight || this.refs.wrapper.clientHeight
 
@@ -145,9 +143,9 @@ class InfiniteList extends React.Component {
     const endIndex = this.findIndexByTop(visibleHeight, startIndex)
 
     // 加入缓存
-    endIndexCache[startIndex] = endIndex
+    list[startIndex].endIndex = endIndex
 
-    this.setState({ endIndexCache })
+    this.setState({ list })
 
     return endIndex
   }
