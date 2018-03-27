@@ -100,21 +100,6 @@ class InfiniteList extends React.Component {
 
   findTopByIndex = index => index ? this.state.list[index - 1].offsetTop : 0
 
-  findIndexByTop = (top, index = 0) => {
-    const { list } = this.state
-
-    while (top > 0) {
-      let i = index + 1
-      if (i !== list.length) {
-        top -= list[++index].height
-      } else {
-        break
-      }
-    }
-
-    return index
-  }
-
   findStartIndex = top => {
     const { list } = this.state
 
@@ -140,7 +125,7 @@ class InfiniteList extends React.Component {
     visibleHeight = visibleHeight || this.refs.wrapper.clientHeight
 
     // 计算endIndex
-    const endIndex = this.findIndexByTop(visibleHeight, startIndex)
+    const endIndex = this.calculateEndIndex(visibleHeight, startIndex)
 
     // 加入缓存
     list[startIndex].endIndex = endIndex
@@ -148,6 +133,21 @@ class InfiniteList extends React.Component {
     this.setState({ list })
 
     return endIndex
+  }
+
+  calculateEndIndex = (visibleHeight, index = 0) => {
+    const { list } = this.state
+
+    while (visibleHeight > 0) {
+      let i = index + 1
+      if (i !== list.length) {
+        visibleHeight -= list[++index].height
+      } else {
+        break
+      }
+    }
+
+    return index
   }
 
   scrollHandler = e => {
