@@ -2,7 +2,6 @@ import Layout from 'components/Layout'
 import 'style/pages/infinite-list'
 
 class InfiniteList extends React.Component {
-
   state = {
     // 总列表，及offsetTop
     list: [],
@@ -26,8 +25,7 @@ class InfiniteList extends React.Component {
 
   randomBoolean = () => Math.random() - 0.5 > 0
 
-  componentWillMount() {
-
+  componentWillMount () {
     // init data
     let list = []
 
@@ -38,7 +36,8 @@ class InfiniteList extends React.Component {
       const height = this.randomBoolean() ? 60 : 30
 
       list.push({
-        val, height,
+        val,
+        height,
         offsetTop: val ? undefined : height
       })
     }
@@ -48,11 +47,11 @@ class InfiniteList extends React.Component {
     this.setState({ list, contentHeight })
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // init height & visible data
     const visibleHeight = this.refs.wrapper.clientHeight
 
-    this.setState({ 
+    this.setState({
       visibleHeight,
       ...this.doCalculate(0)
     })
@@ -65,7 +64,7 @@ class InfiniteList extends React.Component {
 
     // 取缓存
     if (list[index].offsetTop) return list[index].offsetTop
-    
+
     let offsetTop = list[index].height
 
     offsetTop += this.calculateOffset(index - 1)
@@ -82,7 +81,6 @@ class InfiniteList extends React.Component {
   }
 
   doCalculate = startIndex => {
-
     const { list, offset } = this.state
 
     const innerOffset = startIndex = startIndex - offset
@@ -98,14 +96,13 @@ class InfiniteList extends React.Component {
     const visibleData = list.slice(startIndex, endIndex)
 
     const top = this.findTopByIndex(startIndex)
-    
+
     return { visibleData, top }
   }
 
   findTopByIndex = index => index ? this.state.list[index - 1].offsetTop : 0
 
   findIndexByTop = (top, index = 0) => {
-
     const { list } = this.state
 
     while (top > 0) {
@@ -125,7 +122,7 @@ class InfiniteList extends React.Component {
 
     let index = 0
 
-    while(index < list.length) {
+    while (index < list.length) {
       !list[index].offsetTop && this.calculateOffset(index)
 
       if (top < list[index].offsetTop) break
@@ -140,8 +137,7 @@ class InfiniteList extends React.Component {
     let { visibleHeight, endIndexCache } = this.state
 
     // 取缓存
-    if (endIndexCache[startIndex]) 
-      return endIndexCache[startIndex]
+    if (endIndexCache[startIndex]) { return endIndexCache[startIndex] }
 
     visibleHeight = visibleHeight || this.refs.wrapper.clientHeight
 
@@ -162,19 +158,18 @@ class InfiniteList extends React.Component {
     const startIndex = this.findStartIndex(e.target.scrollTop)
 
     startIndex % interval === 0 && this.setState(this.doCalculate(startIndex))
-
   }
 
   render () {
     const { visibleData, contentHeight, top } = this.state
 
     return (
-      <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref="wrapper"> 
-        <div className="infinite-list-ghost" style={{height: contentHeight}}></div>
-        <div className='infinite-list' style={{transform: `translate3d(0, ${ top }px, 0)`}}>
+      <div className='infinite-list-wrapper' onScroll={this.scrollHandler} ref='wrapper'>
+        <div className='infinite-list-ghost' style={{height: contentHeight}} />
+        <div className='infinite-list' style={{transform: `translate3d(0, ${top}px, 0)`}}>
           { visibleData.map((item, i) => {
             const style = {height: `${item.height}px`, lineHeight: `${item.height}px`}
-            return <div className="item" key={i} style={style}>{`item-${item.val}`}</div>
+            return <div className='item' key={i} style={style}>{`item-${item.val}`}</div>
           }) }
         </div>
       </div>

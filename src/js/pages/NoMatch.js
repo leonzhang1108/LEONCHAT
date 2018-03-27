@@ -11,7 +11,7 @@ class NoMatch extends React.Component {
 
     return (
       <div className='no-match-wraper'>
-        <i className='icon iconfont icon-404 font-404-icon'/>
+        <i className='icon iconfont icon-404 font-404-icon' />
         <div>{common.noMatch}</div>
       </div>
     )

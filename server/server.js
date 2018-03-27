@@ -15,8 +15,6 @@ const wdm = require('koa-webpack-dev-middleware')
 const whm = require('koa-webpack-hot-middleware')
 const historyFallback = require('koa2-history-api-fallback')
 const webpackConfig = require('../build/webpack.dev.conf.babel')
-const Dashboard = require('webpack-dashboard')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 
 const port = process.env.PORT || config.dev.port
 // const staticPath = '../src'
