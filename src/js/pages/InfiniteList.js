@@ -11,8 +11,6 @@ class InfiniteList extends React.Component {
     contentHeight: 0,
     // 可见高度
     visibleHeight: 0,
-    // item高度
-    itemHeight: 30,
     // 可见列表
     visibleData: [],
     // 上下预加载个数
@@ -27,17 +25,15 @@ class InfiniteList extends React.Component {
     // init data
     let list = []
 
-    const { itemHeight } = this.state
-
-    for (let val = 0; val < 1230; val++) {
+    for (let val = 0; val < 777; val++) {
       // randam height
       const height = this.randomBoolean() ? 60 : 30
 
-      list.push({
-        val,
-        height,
-        offsetTop: val ? undefined : height
-      })
+      let obj = { val, height }
+
+      if (!val) obj.offsetTop = height
+
+      list.push(obj)
     }
 
     const contentHeight = list.reduce((p, c) => p + c.height, 0)
