@@ -1,7 +1,7 @@
-const { observable, action } = Mobx
 import { createSocket } from 'socket'
 import { getHistory } from 'api'
 import { storage } from 'utils/util'
+const { observable, action } = Mobx
 
 class Store {
   // 被观察者

@@ -1,8 +1,8 @@
 import ChatItem from 'components/ChatItem'
 import ChatPullToRefresh from 'components/ChatPullToRefresh'
 import 'style/components/chat-window'
-const { observer, inject } = MobxReact
 import { InputItem, Button } from 'antd'
+const { observer, inject } = MobxReact
 
 @inject('store')
 @observer

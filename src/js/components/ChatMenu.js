@@ -3,9 +3,9 @@ import routers from 'routers'
 import ChatMenuEl from './ChatMenuEl'
 import ChatMenuLoading from './ChatMenuLoading'
 import ChatMenuLangSwitch from './ChatMenuLangSwitch'
-const { observer, inject } = MobxReact
 import { withRouter } from 'react-router-dom'
 import 'style/components/chat-menu'
+const { observer, inject } = MobxReact
 
 @inject('store')
 @observer
